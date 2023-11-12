@@ -1,6 +1,7 @@
 (function(Scratch) {
     'use strict';
     const vm = Scratch.vm;
+    const runtime = vm.runtime;
     class Scratch3CanvasBlocks {
         constructor(runtime) {
           /**
