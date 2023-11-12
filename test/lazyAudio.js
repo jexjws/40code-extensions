@@ -32,7 +32,7 @@ class Scratch3LazyAudioBlocks {
           text: '加载([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             }
           }
@@ -42,7 +42,7 @@ class Scratch3LazyAudioBlocks {
           text: '播放([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             }
           }
@@ -52,7 +52,7 @@ class Scratch3LazyAudioBlocks {
           text: '暂停([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             }
           }
@@ -67,7 +67,7 @@ class Scratch3LazyAudioBlocks {
           text: '获取当前播放秒数([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             }
           }
@@ -77,7 +77,7 @@ class Scratch3LazyAudioBlocks {
           text: '获取音频总长度(秒)([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             }
           }
@@ -87,11 +87,11 @@ class Scratch3LazyAudioBlocks {
           text: '设置音频([AUDIO_ID])播放秒数[s]',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             },
             s: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: '14'
             }
           }
@@ -101,7 +101,7 @@ class Scratch3LazyAudioBlocks {
           text: '获取音频播放速度([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             }
           }
@@ -111,11 +111,11 @@ class Scratch3LazyAudioBlocks {
           text: '设置音频([AUDIO_ID])播放速度[s]',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             },
             s: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: '2'
             }
           }
@@ -125,11 +125,11 @@ class Scratch3LazyAudioBlocks {
           text: '设置音频([AUDIO_ID])音量[s]',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             },
             s: {
-              type: ArgumentType.NUMBER,
+              type: Scratch.ArgumentType.NUMBER,
               defaultValue: '0.14'
             }
           }
@@ -139,11 +139,11 @@ class Scratch3LazyAudioBlocks {
           text: '获取音频([AUDIO_ID])缓冲片段数',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             },
             s: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: '14'
             }
           }
@@ -153,11 +153,11 @@ class Scratch3LazyAudioBlocks {
           text: '获取音频([AUDIO_ID])[s]片段的开始时间',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             },
             s: {
-              type: ArgumentType.NUMBER,
+              type: Scratch.ArgumentType.NUMBER,
               defaultValue: '1'
             }
           }
@@ -167,11 +167,11 @@ class Scratch3LazyAudioBlocks {
           text: '获取音频([AUDIO_ID])[s]片段结束时间',
           arguments: {
             AUDIO_ID: {
-              type: ArgumentType.STRING,
+              type: Scratch.ArgumentType.STRING,
               defaultValue: 'http://music.163.com/song/media/outer/url?id=504923885.mp3'
             },
             s: {
-              type: ArgumentType.NUMBER,
+              type: Scratch.ArgumentType.NUMBER,
               defaultValue: '1'
             }
           }

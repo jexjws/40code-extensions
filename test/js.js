@@ -28,11 +28,11 @@
               text: '设置JS变量[a]的值是[b]',
               arguments: {
                 a: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'index'
                 },
                 b: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'thing'
                 }
               }
@@ -42,7 +42,7 @@
               text: '获取JS变量[a]的值',
               arguments: {
                 a: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'index'
                 }
               }
@@ -52,7 +52,7 @@
               text: '将字符串[a]转换成json对象',
               arguments: {
                 a: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '{"Fruits":["apple","banana"],"app":"scratch"}'
                 }
               }
@@ -62,11 +62,11 @@
               text: 'json对象[a]的第[b]项',
               arguments: {
                 a: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '{"Fruits":["apple","banana"],"app":"sccode"}'
                 },
                 b: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'app'
                 }
               }
@@ -76,7 +76,7 @@
               text: '[a]的长度',
               arguments: {
                 a: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '["a","b","c"]'
                 }
               }
@@ -86,15 +86,15 @@
               text: '设置json对象[a]的第[b]项为[c]并返回',
               arguments: {
                 a: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '{"Fruits":["apple","banana"],"app":"scratch"}'
                 },
                 b: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'app'
                 },
                 c: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'sccode'
                 }
               }
@@ -104,7 +104,7 @@
               text: '将json对象[a]转换成字符串',
               arguments: {
                 a: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: ' '
                 }
               }
@@ -114,11 +114,11 @@
               text: '按[a]拆分[b]',
               arguments: {
                 a: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '_'
                 },
                 b: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'I_want_an_apple'
                 }
               }
@@ -128,11 +128,11 @@
               text: '使用[a]连接[b]',
               arguments: {
                 a: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '_'
                 },
                 b: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '["I","want","an","apple"]'
                 }
               }
@@ -142,11 +142,11 @@
               text: '设置局部变量[a]的值为[b]',
               arguments: {
                 a: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'a'
                 },
                 b: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'b'
                 }
               }
@@ -156,7 +156,7 @@
               text: '获取局部变量[a]的值',
               arguments: {
                 a: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'a'
                 }
               }

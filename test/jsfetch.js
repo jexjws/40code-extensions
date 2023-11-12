@@ -27,11 +27,11 @@
                     text: '设置JS变量[a]的值是[b]',
                     arguments: {
                         a: {
-                            type: ArgumentType.STRING,
+                            type: Scratch.ArgumentType.STRING,
                             defaultValue: 'index'
                         },
                         b: {
-                            type: ArgumentType.STRING,
+                            type: Scratch.ArgumentType.STRING,
                             defaultValue: 'thing'
                         }
                     }
@@ -41,7 +41,7 @@
                         text: '获取JS变量[a]的值',
                         arguments: {
                             a: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'index'
                             }
                         }
@@ -51,11 +51,11 @@
                         text: '设置局部变量[a]的值为[b]',
                         arguments: {
                             a: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'i'
                             },
                             b: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '0'
                             }
                         }
@@ -65,11 +65,11 @@
                         text: '将局部变量[a]增加[b]',
                         arguments: {
                             a: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'i'
                             },
                             b: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '1'
                             }
                         }
@@ -79,7 +79,7 @@
                         text: '局部变量[a]',
                         arguments: {
                             a: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'i'
                             }
                         }
@@ -89,7 +89,7 @@
                         text: '获取scratch列表[name]',
                         arguments: {
                             name: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'scratch列表名'
                             }
                         }
@@ -99,11 +99,11 @@
                         text: '设置scratch列表[name]，值为[value]',
                         arguments: {
                             name: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'scratch列表名'
                             },
                             value: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '[114,5,1,4]'
                             }
                         }
@@ -113,7 +113,7 @@
                         text: '获取scratch变量[name]',
                         arguments: {
                             name: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'scratch变量名'
                             }
                         }
@@ -123,11 +123,11 @@
                         text: '设置scratch变量[name]，值为[value]',
                         arguments: {
                             name: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'scratch变量名'
                             },
                             value: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '114514'
                             }
                         }
@@ -137,11 +137,11 @@
                         text: 'json[a]的第[b]项',
                         arguments: {
                             a: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '{"Fruits":["apple","banana"],"app":"sccode"}'
                             },
                             b: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'app'
                             }
                         }
@@ -151,7 +151,7 @@
                         text: '数组[a]的长度',
                         arguments: {
                             a: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '["I","love","40code"]'
                             }
                         }
@@ -161,15 +161,15 @@
                         text: '设置json[a]的第[b]项为[c]并返回',
                         arguments: {
                             a: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '{"Fruits":["apple","banana"],"app":"scratch"}'
                             },
                             b: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'app'
                             },
                             c: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'sccode'
                             }
                         }
@@ -179,11 +179,11 @@
                         text: '将[b]中的[a]替换成","',
                         arguments: {
                             a: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '_'
                             },
                             b: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'I_want_an_apple'
                             }
                         }
@@ -193,11 +193,11 @@
                         text: '按[a]拆分[b]',
                         arguments: {
                             a: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '_'
                             },
                             b: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'I_want_an_apple'
                             }
                         }
@@ -207,11 +207,11 @@
                         text: '使用[a]连接[b]',
                         arguments: {
                             a: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '_'
                             },
                             b: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '["I","want","an","apple"]'
                             }
                         }
@@ -221,7 +221,7 @@
                         text: '设置请求头[headers]',
                         arguments: {
                             headers: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '{"Content-Type": "application/json"}'
                             }
                         }
@@ -231,7 +231,7 @@
                         text: '设置请求body[body]',
                         arguments: {
                             body: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: "{}"
                             }
                         }
@@ -241,12 +241,12 @@
                         text: '[method]请求[url]',
                         arguments: {
                             method: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'get',
                                 menu: 'method'
                             },
                             url: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'https://saobby.pythonanywhere.com/api/get_current_time'
                             }
                         }
@@ -256,16 +256,16 @@
                         text: '[method]请求[url]并等待，返回[type]',
                         arguments: {
                             method: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'GET',
                                 menu: 'method'
                             },
                             url: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'https://saobby.pythonanywhere.com/api/get_current_time'
                             },
                             type: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '原文',
                                 menu: 'type'
                             }
@@ -276,7 +276,7 @@
                         text: '[type]',
                         arguments: {
                             type: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'error',
                                 menu: 'm'
                             }
@@ -287,7 +287,7 @@
                         text: 'url编码[text]',
                         arguments: {
                             text: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'https://40code.com/'
                             }
                         }
@@ -297,7 +297,7 @@
                         text: 'url解码[text]',
                         arguments: {
                             text: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'https%3A%2F%2F40code.com%2F'
                             }
                         }
@@ -307,7 +307,7 @@
                         text: '转为URL参数[text]',
                         arguments: {
                             text: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: '{"love":"40code","url":"40code.com"}'
                             }
                         }
@@ -317,7 +317,7 @@
                         text: '转为JSON[text]',
                         arguments: {
                             text: {
-                                type: ArgumentType.STRING,
+                                type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'love=40code&url=40code.com'
                             }
                         }

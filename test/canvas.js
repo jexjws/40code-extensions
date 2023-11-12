@@ -22,638 +22,638 @@
             color1: '#2196F3',
             blocks: [{
               opcode: 'reset',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '以宽[w]，高[h]重置canvas',
               arguments: {
                 w: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '480'
                 },
                 h: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '360'
                 }
               }
             }, {
               opcode: 'beginPath',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'beginPath(绘制路径)',
               arguments: {}
             }, {
               opcode: 'closePath',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'closePath(结束路径)',
               arguments: {}
             }, {
               opcode: 'moveTo',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'moveTo(移到)([X],[Y])',
               arguments: {
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'lineTo',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'lineTo([X],[Y])',
               arguments: {
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'arc',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'arc(画弧)([X],[Y],[RADIUS],[START_ANGLE],[END_ANGLE])',
               arguments: {
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 RADIUS: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '100'
                 },
                 START_ANGLE: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 END_ANGLE: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '3.1415926'
                 }
               }
             }, {
               opcode: 'rect',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'rect(矩形)([X],[Y],[W],[H])',
               arguments: {
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 W: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '100'
                 },
                 H: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '100'
                 }
               }
             }, {
               opcode: 'clip',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'clip(裁剪)'
             }, {
               opcode: 'setLineWidth',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setLineWidth(设置线宽)([LINE_WIDTH])',
               arguments: {
                 LINE_WIDTH: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '1'
                 }
               }
             }, {
               opcode: 'setLineCap',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setLineCap(设置线条端点样式)([LINE_CAP])',
               arguments: {
                 LINE_CAP: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'round'
                 }
               }
             }, {
               opcode: 'setStrokeStyle',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setStrokeStyle(设置边框样式)([STROKE_STYLE])',
               arguments: {
                 STROKE_STYLE: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '#000000'
                 }
               }
             }, {
               opcode: 'setFillStyle',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setFillStyle(设置填充样式)([FILL_STYLE])',
               arguments: {
                 FILL_STYLE: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '#000000'
                 }
               }
             }, {
               opcode: 'stroke',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'stroke(边框)'
             }, {
               opcode: 'fill',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'fill(填充)'
             }, {
               opcode: 'clearRect',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'clearRect(清除矩形)([X],[Y],[W],[H])',
               arguments: {
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 W: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '480'
                 },
                 H: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '360'
                 }
               }
             }, {
               opcode: 'setFont',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setFont(设置字体)([FONT])',
               arguments: {
                 FONT: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '30px Arial'
                 }
               }
             }, {
               opcode: 'strokeText',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'strokeText(字体边框)([TEXT],[X],[Y])',
               arguments: {
                 TEXT: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'hello world'
                 },
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'fillText',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'fillText(字体填充)([TEXT],[X],[Y])',
               arguments: {
                 TEXT: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'hello world'
                 },
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'measureText',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: 'measureText([TEXT])',
               arguments: {
                 TEXT: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'hello world'
                 }
               }
             }, {
               opcode: 'loadImage',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '加载图片([IMAGE_ID])',
               arguments: {
                 IMAGE_ID: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
                 }
               }
             }, {
               opcode: 'drawImage',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '绘制图片([IMAGE_ID],[X],[Y])',
               arguments: {
                 IMAGE_ID: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
                 },
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'drawImage2',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '绘制图片([IMAGE_ID] X[X] Y[Y] 宽度[w] 高度[h])',
               arguments: {
                 IMAGE_ID: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
                 },
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 w: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 h: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'drawImage3',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '绘制图片([IMAGE_ID] 起始X[SX] Y[SY] 宽度[sw] 高度[sh]；结束X[X] Y[Y] 宽度[w] 高度[h])',
               arguments: {
                 IMAGE_ID: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
                 },
                 SX: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 SY: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 sw: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 sh: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 w: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 h: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'iw',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '图片([IMAGE_ID])宽度',
               arguments: {
                 IMAGE_ID: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
                 }
               }
             }, {
               opcode: 'ih',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '图片([IMAGE_ID])高度',
               arguments: {
                 IMAGE_ID: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
                 }
               }
             },, {
               opcode: 'drawv',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '绘制视频当前帧([IMAGE_ID],[X],[Y])',
               arguments: {
                 IMAGE_ID: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'https://sccode.52msr.cn/vedio/sea.mp4'
                 },
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'drawv2',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '绘制视频当前帧([IMAGE_ID] X[X] Y[Y] 宽度[w] 高度[h])',
               arguments: {
                 IMAGE_ID: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
                 },
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 w: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 h: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'drawv3',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '绘制视频当前帧([IMAGE_ID] 起始X[SX] Y[SY] 宽度[sw] 高度[sh]；结束X[X] Y[Y] 宽度[w] 高度[h])',
               arguments: {
                 IMAGE_ID: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
                 },
                 SX: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 SY: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 sw: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 sh: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 w: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 h: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'scale',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'scale([SCALE_W],[SCALE_H])',
               arguments: {
                 SCALE_W: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '1.0'
                 },
                 SCALE_H: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '1.0'
                 }
               }
             }, {
               opcode: 'rotate',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'rotate([ANGLE])',
               arguments: {
                 ANGLE: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'translate',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'translate([X],[Y])',
               arguments: {
                 X: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 Y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'transform',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'transform([A],[B],[C],[D],[E],[F])',
               arguments: {
                 A: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 B: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 C: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 D: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 E: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 F: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'clearTransform',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'clearTransform'
             }, {
               opcode: 'save',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'save'
             }, {
               opcode: 'restore',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'restore'
             }, {
               opcode: 'setGlobalAlpha',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setGlobalAlpha([ALPHA])',
               arguments: {
                 ALPHA: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '1.0'
                 }
               }
             }, {
               opcode: 'setGlobalCompositeOperation',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setGlobalCompositeOperation([CompositeOperation])',
               arguments: {
                 CompositeOperation: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'source-over'
                 }
               }
             }, {
               opcode: 'switchCanvas',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'switchCanvas([NUMBER])',
               arguments: {
                 NUMBER: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'stampOnStage',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '显示canvas内容'
             }, {
               opcode: 'stampOnStageDev',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '显示canvas内容([ox],[oy],[ox2],[oy2])',
               arguments: {
                 ox: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '0'
                 },
                 oy: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '0'
                 },
                 ox2: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '480'
                 },
                 oy2: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '360'
                 }
               }
             }, {
               opcode: 'stampTo',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '将canvas转换为base64',
               disableMonitor: true,
               arguments: {
                 ox: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 oy: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 ox2: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '480'
                 },
                 oy2: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '360'
                 }
               }
             }, {
               opcode: 'setLineDash',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setLineDash([c1],[c])',
               arguments: {
                 c1: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '20'
                 },
                 c: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '5'
                 }
               }
             }, {
               opcode: 'lineDashOffset',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setlineDashOffset[c]',
               arguments: {
                 c: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'strokeRect',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setstrokeRect([c1],[c2],[c3],[c4])',
               arguments: {
                 c1: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 c2: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 c3: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 c4: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
@@ -661,38 +661,38 @@
             /*
             {
               opcode: 'createLinearGradient',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'createLinearGradient([c1],[c2],[c3],[c4])',
               arguments: {
                   c1: {
-                      type: ArgumentType.NUMBER,
+                      type: Scratch.ArgumentType.NUMBER,
                       defaultValue: '0'
                   },
                   c2: {
-                      type: ArgumentType.NUMBER,
+                      type: Scratch.ArgumentType.NUMBER,
                       defaultValue: '0'
                   },
                   c3: {
-                      type: ArgumentType.NUMBER,
+                      type: Scratch.ArgumentType.NUMBER,
                       defaultValue: '0'
                   },
                   c4: {
-                      type: ArgumentType.NUMBER,
+                      type: Scratch.ArgumentType.NUMBER,
                       defaultValue: '0'
                   }
               }
             },
             {
               opcode: 'addColorStop',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'addColorStop([c1],[c2])',
               arguments: {
                   c1: {
-                      type: ArgumentType.NUMBER,
+                      type: Scratch.ArgumentType.NUMBER,
                       defaultValue: '0'
                   },
                   c2: {
-                      type: ArgumentType.STRING,
+                      type: Scratch.ArgumentType.STRING,
                       defaultValue: '#00FF00'
                   }
                  
@@ -700,136 +700,136 @@
             },
             {
               opcode: 'fillss',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '设置填充颜色为渐变'
             },*/
             {
               opcode: 'fillRect',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'fillRect([c1],[c2],[c3],[c4])',
               arguments: {
                 c1: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 c2: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 c3: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 },
                 c4: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'shadowBlur',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setshadowBlur[c1]',
               arguments: {
                 c1: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'shadowColor',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setshadowColor[c1]',
               arguments: {
                 c1: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'shadowOffsetX',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setshadowOffsetX[c1]',
               arguments: {
                 c1: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'shadowOffsetY',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'setshadowOffsetY[c1]',
               arguments: {
                 c1: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '0'
                 }
               }
             }, {
               opcode: 'textAlign',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: 'settextAlign[c1]',
               arguments: {
                 c1: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'left'
                 }
               }
             }, {
               opcode: 'getcolor',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '获取canvas第[c]个像素点颜色[color]',
               arguments: {
                 color: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   menu: 'color',
                   defaultValue: 'red'
                 },
                 c: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '1'
                 }
               }
             }, {
               opcode: 'saveccolor',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '保存canvas颜色'
             }, {
               opcode: 'setccolor',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '设置canvas第[c]个像素点颜色[color][c2]',
               arguments: {
                 color: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   menu: 'color2',
                   defaultValue: 'red'
                 },
                 c: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '1'
                 },
                 c2: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '144'
                 }
               }
             }, {
               opcode: 'isin',
-              blockType: BlockType.BOOLEAN,
+              blockType: Scratch.BlockType.BOOLEAN,
               text: 'x[x],[y]在当前路径上吗',
               arguments: {
                 x: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '1'
                 },
                 y: {
-                  type: ArgumentType.NUMBER,
+                  type: Scratch.ArgumentType.NUMBER,
                   defaultValue: '144'
                 }
               }
             }, {
               opcode: 'showccolor',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '显示保存的颜色'
             }],
             menus: {

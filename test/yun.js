@@ -25,11 +25,11 @@
               text: '获取云变量，变量名[TEXT]，来源[m]',
               arguments: {
                 TEXT: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'a'
                 },
                 m: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '此作品',
                   menu: 'm2'
                 }
@@ -40,11 +40,11 @@
               text: '获取[TEXT]开头的云变量名，来源[m]',
               arguments: {
                 TEXT: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'a'
                 },
                 m: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '此作品',
                   menu: 'm2'
                 }
@@ -55,15 +55,15 @@
               text: '保存云变量，内容[TEXT]，变量名[TEXT2]，并返回错误值，来源[m]',
               arguments: {
                 TEXT: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'things'
                 },
                 TEXT2: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'a'
                 },
                 m: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '此作品',
                   menu: 'm2'
                 }
@@ -74,15 +74,15 @@
               text: '保存云变量，内容[TEXT]，变量名[TEXT2]，来源[m]',
               arguments: {
                 TEXT: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'things'
                 },
                 TEXT2: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: 'a'
                 },
                 m: {
-                  type: ArgumentType.STRING,
+                  type: Scratch.ArgumentType.STRING,
                   defaultValue: '此作品',
                   menu: 'm2'
                 }
