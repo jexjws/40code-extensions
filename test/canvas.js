@@ -1,1312 +1,1632 @@
 (function(Scratch) {
     'use strict';
-    class canvas{
-        constructor(e) {
-            this.runtime = e,
-            this._penSkinId = -2
+    class Scratch3CanvasBlocks {
+        constructor(runtime) {
+          /**
+           * The runtime instantiating this block package.
+           * @type {Runtime}
+           */
+          this.runtime = runtime;
+          this._penSkinId = -2; // this._penDrawableId = -2;
         }
+        /**
+         * @returns {object} metadata for this extension and its blocks.
+         */
+      
+      
         getInfo() {
-            return {
-                id: "canvas",
-                name: "Canvas",
-                color1: "#2196F3",
-                blocks: [{
-                    opcode: "reset",
-                    blockType: r.COMMAND,
-                    text: "以宽[w]，高[h]重置canvas",
-                    arguments: {
-                        w: {
-                            type: n.NUMBER,
-                            defaultValue: "480"
-                        },
-                        h: {
-                            type: n.NUMBER,
-                            defaultValue: "360"
-                        }
-                    }
-                }, {
-                    opcode: "beginPath",
-                    blockType: r.COMMAND,
-                    text: "beginPath(绘制路径)",
-                    arguments: {}
-                }, {
-                    opcode: "closePath",
-                    blockType: r.COMMAND,
-                    text: "closePath(结束路径)",
-                    arguments: {}
-                }, {
-                    opcode: "moveTo",
-                    blockType: r.COMMAND,
-                    text: "moveTo(移到)([X],[Y])",
-                    arguments: {
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "lineTo",
-                    blockType: r.COMMAND,
-                    text: "lineTo([X],[Y])",
-                    arguments: {
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "arc",
-                    blockType: r.COMMAND,
-                    text: "arc(画弧)([X],[Y],[RADIUS],[START_ANGLE],[END_ANGLE])",
-                    arguments: {
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        RADIUS: {
-                            type: n.NUMBER,
-                            defaultValue: "100"
-                        },
-                        START_ANGLE: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        END_ANGLE: {
-                            type: n.NUMBER,
-                            defaultValue: "3.1415926"
-                        }
-                    }
-                }, {
-                    opcode: "rect",
-                    blockType: r.COMMAND,
-                    text: "rect(矩形)([X],[Y],[W],[H])",
-                    arguments: {
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        W: {
-                            type: n.NUMBER,
-                            defaultValue: "100"
-                        },
-                        H: {
-                            type: n.NUMBER,
-                            defaultValue: "100"
-                        }
-                    }
-                }, {
-                    opcode: "clip",
-                    blockType: r.COMMAND,
-                    text: "clip(裁剪)"
-                }, {
-                    opcode: "setLineWidth",
-                    blockType: r.COMMAND,
-                    text: "setLineWidth(设置线宽)([LINE_WIDTH])",
-                    arguments: {
-                        LINE_WIDTH: {
-                            type: n.NUMBER,
-                            defaultValue: "1"
-                        }
-                    }
-                }, {
-                    opcode: "setLineCap",
-                    blockType: r.COMMAND,
-                    text: "setLineCap(设置线条端点样式)([LINE_CAP])",
-                    arguments: {
-                        LINE_CAP: {
-                            type: n.STRING,
-                            defaultValue: "round"
-                        }
-                    }
-                }, {
-                    opcode: "setStrokeStyle",
-                    blockType: r.COMMAND,
-                    text: "setStrokeStyle(设置边框样式)([STROKE_STYLE])",
-                    arguments: {
-                        STROKE_STYLE: {
-                            type: n.STRING,
-                            defaultValue: "#000000"
-                        }
-                    }
-                }, {
-                    opcode: "setFillStyle",
-                    blockType: r.COMMAND,
-                    text: "setFillStyle(设置填充样式)([FILL_STYLE])",
-                    arguments: {
-                        FILL_STYLE: {
-                            type: n.STRING,
-                            defaultValue: "#000000"
-                        }
-                    }
-                }, {
-                    opcode: "stroke",
-                    blockType: r.COMMAND,
-                    text: "stroke(边框)"
-                }, {
-                    opcode: "fill",
-                    blockType: r.COMMAND,
-                    text: "fill(填充)"
-                }, {
-                    opcode: "clearRect",
-                    blockType: r.COMMAND,
-                    text: "clearRect(清除矩形)([X],[Y],[W],[H])",
-                    arguments: {
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        W: {
-                            type: n.NUMBER,
-                            defaultValue: "480"
-                        },
-                        H: {
-                            type: n.NUMBER,
-                            defaultValue: "360"
-                        }
-                    }
-                }, {
-                    opcode: "setFont",
-                    blockType: r.COMMAND,
-                    text: "setFont(设置字体)([FONT])",
-                    arguments: {
-                        FONT: {
-                            type: n.STRING,
-                            defaultValue: "30px Arial"
-                        }
-                    }
-                }, {
-                    opcode: "strokeText",
-                    blockType: r.COMMAND,
-                    text: "strokeText(字体边框)([TEXT],[X],[Y])",
-                    arguments: {
-                        TEXT: {
-                            type: n.STRING,
-                            defaultValue: "hello world"
-                        },
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "fillText",
-                    blockType: r.COMMAND,
-                    text: "fillText(字体填充)([TEXT],[X],[Y])",
-                    arguments: {
-                        TEXT: {
-                            type: n.STRING,
-                            defaultValue: "hello world"
-                        },
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "measureText",
-                    blockType: r.REPORTER,
-                    text: "measureText([TEXT])",
-                    arguments: {
-                        TEXT: {
-                            type: n.STRING,
-                            defaultValue: "hello world"
-                        }
-                    }
-                }, {
-                    opcode: "loadImage",
-                    blockType: r.COMMAND,
-                    text: "加载图片([IMAGE_ID])",
-                    arguments: {
-                        IMAGE_ID: {
-                            type: n.STRING,
-                            defaultValue: "https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg"
-                        }
-                    }
-                }, {
-                    opcode: "drawImage",
-                    blockType: r.COMMAND,
-                    text: "绘制图片([IMAGE_ID],[X],[Y])",
-                    arguments: {
-                        IMAGE_ID: {
-                            type: n.STRING,
-                            defaultValue: "https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg"
-                        },
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "drawImage2",
-                    blockType: r.COMMAND,
-                    text: "绘制图片([IMAGE_ID] X[X] Y[Y] 宽度[w] 高度[h])",
-                    arguments: {
-                        IMAGE_ID: {
-                            type: n.STRING,
-                            defaultValue: "https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg"
-                        },
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        w: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        h: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "drawImage3",
-                    blockType: r.COMMAND,
-                    text: "绘制图片([IMAGE_ID] 起始X[SX] Y[SY] 宽度[sw] 高度[sh]；结束X[X] Y[Y] 宽度[w] 高度[h])",
-                    arguments: {
-                        IMAGE_ID: {
-                            type: n.STRING,
-                            defaultValue: "https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg"
-                        },
-                        SX: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        SY: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        sw: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        sh: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        w: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        h: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "iw",
-                    blockType: r.REPORTER,
-                    text: "图片([IMAGE_ID])宽度",
-                    arguments: {
-                        IMAGE_ID: {
-                            type: n.STRING,
-                            defaultValue: "https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg"
-                        }
-                    }
-                }, {
-                    opcode: "ih",
-                    blockType: r.REPORTER,
-                    text: "图片([IMAGE_ID])高度",
-                    arguments: {
-                        IMAGE_ID: {
-                            type: n.STRING,
-                            defaultValue: "https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg"
-                        }
-                    }
-                }, , {
-                    opcode: "drawv",
-                    blockType: r.COMMAND,
-                    text: "绘制视频当前帧([IMAGE_ID],[X],[Y])",
-                    arguments: {
-                        IMAGE_ID: {
-                            type: n.STRING,
-                            defaultValue: "https://sccode.52msr.cn/vedio/sea.mp4"
-                        },
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "drawv2",
-                    blockType: r.COMMAND,
-                    text: "绘制视频当前帧([IMAGE_ID] X[X] Y[Y] 宽度[w] 高度[h])",
-                    arguments: {
-                        IMAGE_ID: {
-                            type: n.STRING,
-                            defaultValue: "https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg"
-                        },
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        w: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        h: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "drawv3",
-                    blockType: r.COMMAND,
-                    text: "绘制视频当前帧([IMAGE_ID] 起始X[SX] Y[SY] 宽度[sw] 高度[sh]；结束X[X] Y[Y] 宽度[w] 高度[h])",
-                    arguments: {
-                        IMAGE_ID: {
-                            type: n.STRING,
-                            defaultValue: "https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg"
-                        },
-                        SX: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        SY: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        sw: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        sh: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        w: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        h: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "scale",
-                    blockType: r.COMMAND,
-                    text: "scale([SCALE_W],[SCALE_H])",
-                    arguments: {
-                        SCALE_W: {
-                            type: n.NUMBER,
-                            defaultValue: "1.0"
-                        },
-                        SCALE_H: {
-                            type: n.NUMBER,
-                            defaultValue: "1.0"
-                        }
-                    }
-                }, {
-                    opcode: "rotate",
-                    blockType: r.COMMAND,
-                    text: "rotate([ANGLE])",
-                    arguments: {
-                        ANGLE: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "translate",
-                    blockType: r.COMMAND,
-                    text: "translate([X],[Y])",
-                    arguments: {
-                        X: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        Y: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "transform",
-                    blockType: r.COMMAND,
-                    text: "transform([A],[B],[C],[D],[E],[F])",
-                    arguments: {
-                        A: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        B: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        C: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        D: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        E: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        F: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "clearTransform",
-                    blockType: r.COMMAND,
-                    text: "clearTransform"
-                }, {
-                    opcode: "save",
-                    blockType: r.COMMAND,
-                    text: "save"
-                }, {
-                    opcode: "restore",
-                    blockType: r.COMMAND,
-                    text: "restore"
-                }, {
-                    opcode: "setGlobalAlpha",
-                    blockType: r.COMMAND,
-                    text: "setGlobalAlpha([ALPHA])",
-                    arguments: {
-                        ALPHA: {
-                            type: n.NUMBER,
-                            defaultValue: "1.0"
-                        }
-                    }
-                }, {
-                    opcode: "setGlobalCompositeOperation",
-                    blockType: r.COMMAND,
-                    text: "setGlobalCompositeOperation([CompositeOperation])",
-                    arguments: {
-                        CompositeOperation: {
-                            type: n.STRING,
-                            defaultValue: "source-over"
-                        }
-                    }
-                }, {
-                    opcode: "switchCanvas",
-                    blockType: r.COMMAND,
-                    text: "switchCanvas([NUMBER])",
-                    arguments: {
-                        NUMBER: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "stampOnStage",
-                    blockType: r.COMMAND,
-                    text: "显示canvas内容"
-                }, {
-                    opcode: "stampOnStageDev",
-                    blockType: r.COMMAND,
-                    text: "显示canvas内容([ox],[oy],[ox2],[oy2])",
-                    arguments: {
-                        ox: {
-                            type: n.STRING,
-                            defaultValue: "0"
-                        },
-                        oy: {
-                            type: n.STRING,
-                            defaultValue: "0"
-                        },
-                        ox2: {
-                            type: n.STRING,
-                            defaultValue: "480"
-                        },
-                        oy2: {
-                            type: n.STRING,
-                            defaultValue: "360"
-                        }
-                    }
-                }, {
-                    opcode: "stampTo",
-                    blockType: r.REPORTER,
-                    text: "将canvas转换为base64",
-                    disableMonitor: !0,
-                    arguments: {
-                        ox: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        oy: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        ox2: {
-                            type: n.NUMBER,
-                            defaultValue: "480"
-                        },
-                        oy2: {
-                            type: n.NUMBER,
-                            defaultValue: "360"
-                        }
-                    }
-                }, {
-                    opcode: "setLineDash",
-                    blockType: r.COMMAND,
-                    text: "setLineDash([c1],[c])",
-                    arguments: {
-                        c1: {
-                            type: n.STRING,
-                            defaultValue: "20"
-                        },
-                        c: {
-                            type: n.STRING,
-                            defaultValue: "5"
-                        }
-                    }
-                }, {
-                    opcode: "lineDashOffset",
-                    blockType: r.COMMAND,
-                    text: "setlineDashOffset[c]",
-                    arguments: {
-                        c: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "strokeRect",
-                    blockType: r.COMMAND,
-                    text: "setstrokeRect([c1],[c2],[c3],[c4])",
-                    arguments: {
-                        c1: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        c2: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        c3: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        c4: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "fillRect",
-                    blockType: r.COMMAND,
-                    text: "fillRect([c1],[c2],[c3],[c4])",
-                    arguments: {
-                        c1: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        c2: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        c3: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        },
-                        c4: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "shadowBlur",
-                    blockType: r.COMMAND,
-                    text: "setshadowBlur[c1]",
-                    arguments: {
-                        c1: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "shadowColor",
-                    blockType: r.COMMAND,
-                    text: "setshadowColor[c1]",
-                    arguments: {
-                        c1: {
-                            type: n.STRING,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "shadowOffsetX",
-                    blockType: r.COMMAND,
-                    text: "setshadowOffsetX[c1]",
-                    arguments: {
-                        c1: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "shadowOffsetY",
-                    blockType: r.COMMAND,
-                    text: "setshadowOffsetY[c1]",
-                    arguments: {
-                        c1: {
-                            type: n.NUMBER,
-                            defaultValue: "0"
-                        }
-                    }
-                }, {
-                    opcode: "textAlign",
-                    blockType: r.COMMAND,
-                    text: "settextAlign[c1]",
-                    arguments: {
-                        c1: {
-                            type: n.STRING,
-                            defaultValue: "left"
-                        }
-                    }
-                }, {
-                    opcode: "getcolor",
-                    blockType: r.REPORTER,
-                    text: "获取canvas第[c]个像素点颜色[color]",
-                    arguments: {
-                        color: {
-                            type: n.STRING,
-                            menu: "color",
-                            defaultValue: "red"
-                        },
-                        c: {
-                            type: n.NUMBER,
-                            defaultValue: "1"
-                        }
-                    }
-                }, {
-                    opcode: "saveccolor",
-                    blockType: r.COMMAND,
-                    text: "保存canvas颜色"
-                }, {
-                    opcode: "setccolor",
-                    blockType: r.COMMAND,
-                    text: "设置canvas第[c]个像素点颜色[color][c2]",
-                    arguments: {
-                        color: {
-                            type: n.STRING,
-                            menu: "color2",
-                            defaultValue: "red"
-                        },
-                        c: {
-                            type: n.NUMBER,
-                            defaultValue: "1"
-                        },
-                        c2: {
-                            type: n.NUMBER,
-                            defaultValue: "144"
-                        }
-                    }
-                }, {
-                    opcode: "isin",
-                    blockType: r.BOOLEAN,
-                    text: "x[x],[y]在当前路径上吗",
-                    arguments: {
-                        x: {
-                            type: n.NUMBER,
-                            defaultValue: "1"
-                        },
-                        y: {
-                            type: n.NUMBER,
-                            defaultValue: "144"
-                        }
-                    }
-                }, {
-                    opcode: "showccolor",
-                    blockType: r.COMMAND,
-                    text: "显示保存的颜色"
-                }],
-                menus: {
-                    color: ["red", "green", "blue", "alpha", "全部"],
-                    color2: ["red", "green", "blue", "alpha"]
+          return {
+            id: 'canvas',
+            name: 'Canvas',
+            // blockIconURI: blockIconURI,
+            color1: '#2196F3',
+            blocks: [{
+              opcode: 'reset',
+              blockType: BlockType.COMMAND,
+              text: '以宽[w]，高[h]重置canvas',
+              arguments: {
+                w: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '480'
+                },
+                h: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '360'
                 }
-            }
-        }
-        _createCanvas(e, t) {
-            if (vm.runtime.ext_pen && vm.runtime.ext_pen._penSkinId >= 0 && (this._penSkinId = vm.runtime.ext_pen._penSkinId,
-            this._penDrawableId = vm.runtime.ext_pen._penDrawableId),
-            this._penSkinId < 0 && this.runtime.renderer && (this._penSkinId = this.runtime.renderer.createPenSkin(),
-            this._penDrawableId = this.runtime.renderer.createDrawable(a.PEN_LAYER),
-            this.runtime.renderer.updateDrawableSkinId(this._penDrawableId, this._penSkinId)),
-            this._penSkinId)
-                var i = this._penSkinId;
-            if (this.runtime.penSkinId = i,
-            null == i)
-                return null;
-            var n = this.runtime.renderer._allSkins[i].size
-              , r = (e = e || n[0],
-            t = t || n[1],
-            document.createElement("canvas"));
-            r.width = e,
-            r.height = t;
-            var o = r.getContext("2d");
-            return {
-                canvas: r,
-                ctx: o
-            }
-        }
-        _getContext(e, t, i) {
-            if (!this._ctx || t || i) {
-                this._canvasList = [];
-                for (var n = 0; n < 8; n++)
-                    this._canvasList.push(null);
-                if (!(r = this._createCanvas(t, i)))
-                    return null;
-                try {
-                    this._canvasList[0].remove()
-                } catch (e) {
-                    console.log(e)
+              }
+            }, {
+              opcode: 'beginPath',
+              blockType: BlockType.COMMAND,
+              text: 'beginPath(绘制路径)',
+              arguments: {}
+            }, {
+              opcode: 'closePath',
+              blockType: BlockType.COMMAND,
+              text: 'closePath(结束路径)',
+              arguments: {}
+            }, {
+              opcode: 'moveTo',
+              blockType: BlockType.COMMAND,
+              text: 'moveTo(移到)([X],[Y])',
+              arguments: {
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
                 }
-                this._canvasList[0] = r,
-                this._canvas = r.canvas,
-                this._ctx = r.ctx,
-                this._bufferedImages = {},
-                this._skinId = this.runtime.renderer.createBitmapSkin(this._createCanvas().canvas, 1),
-                this._drawableId = this.runtime.renderer.createDrawable(a.PEN_LAYER),
-                this.runtime.renderer.updateDrawableSkinId(this._drawableId, this._skinId),
-                this.runtime.renderer.updateDrawableVisible(this._drawableId, !1)
+              }
+            }, {
+              opcode: 'lineTo',
+              blockType: BlockType.COMMAND,
+              text: 'lineTo([X],[Y])',
+              arguments: {
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'arc',
+              blockType: BlockType.COMMAND,
+              text: 'arc(画弧)([X],[Y],[RADIUS],[START_ANGLE],[END_ANGLE])',
+              arguments: {
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                RADIUS: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '100'
+                },
+                START_ANGLE: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                END_ANGLE: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '3.1415926'
+                }
+              }
+            }, {
+              opcode: 'rect',
+              blockType: BlockType.COMMAND,
+              text: 'rect(矩形)([X],[Y],[W],[H])',
+              arguments: {
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                W: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '100'
+                },
+                H: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '100'
+                }
+              }
+            }, {
+              opcode: 'clip',
+              blockType: BlockType.COMMAND,
+              text: 'clip(裁剪)'
+            }, {
+              opcode: 'setLineWidth',
+              blockType: BlockType.COMMAND,
+              text: 'setLineWidth(设置线宽)([LINE_WIDTH])',
+              arguments: {
+                LINE_WIDTH: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '1'
+                }
+              }
+            }, {
+              opcode: 'setLineCap',
+              blockType: BlockType.COMMAND,
+              text: 'setLineCap(设置线条端点样式)([LINE_CAP])',
+              arguments: {
+                LINE_CAP: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'round'
+                }
+              }
+            }, {
+              opcode: 'setStrokeStyle',
+              blockType: BlockType.COMMAND,
+              text: 'setStrokeStyle(设置边框样式)([STROKE_STYLE])',
+              arguments: {
+                STROKE_STYLE: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '#000000'
+                }
+              }
+            }, {
+              opcode: 'setFillStyle',
+              blockType: BlockType.COMMAND,
+              text: 'setFillStyle(设置填充样式)([FILL_STYLE])',
+              arguments: {
+                FILL_STYLE: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '#000000'
+                }
+              }
+            }, {
+              opcode: 'stroke',
+              blockType: BlockType.COMMAND,
+              text: 'stroke(边框)'
+            }, {
+              opcode: 'fill',
+              blockType: BlockType.COMMAND,
+              text: 'fill(填充)'
+            }, {
+              opcode: 'clearRect',
+              blockType: BlockType.COMMAND,
+              text: 'clearRect(清除矩形)([X],[Y],[W],[H])',
+              arguments: {
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                W: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '480'
+                },
+                H: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '360'
+                }
+              }
+            }, {
+              opcode: 'setFont',
+              blockType: BlockType.COMMAND,
+              text: 'setFont(设置字体)([FONT])',
+              arguments: {
+                FONT: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '30px Arial'
+                }
+              }
+            }, {
+              opcode: 'strokeText',
+              blockType: BlockType.COMMAND,
+              text: 'strokeText(字体边框)([TEXT],[X],[Y])',
+              arguments: {
+                TEXT: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'hello world'
+                },
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'fillText',
+              blockType: BlockType.COMMAND,
+              text: 'fillText(字体填充)([TEXT],[X],[Y])',
+              arguments: {
+                TEXT: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'hello world'
+                },
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'measureText',
+              blockType: BlockType.REPORTER,
+              text: 'measureText([TEXT])',
+              arguments: {
+                TEXT: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'hello world'
+                }
+              }
+            }, {
+              opcode: 'loadImage',
+              blockType: BlockType.COMMAND,
+              text: '加载图片([IMAGE_ID])',
+              arguments: {
+                IMAGE_ID: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
+                }
+              }
+            }, {
+              opcode: 'drawImage',
+              blockType: BlockType.COMMAND,
+              text: '绘制图片([IMAGE_ID],[X],[Y])',
+              arguments: {
+                IMAGE_ID: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
+                },
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'drawImage2',
+              blockType: BlockType.COMMAND,
+              text: '绘制图片([IMAGE_ID] X[X] Y[Y] 宽度[w] 高度[h])',
+              arguments: {
+                IMAGE_ID: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
+                },
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                w: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                h: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'drawImage3',
+              blockType: BlockType.COMMAND,
+              text: '绘制图片([IMAGE_ID] 起始X[SX] Y[SY] 宽度[sw] 高度[sh]；结束X[X] Y[Y] 宽度[w] 高度[h])',
+              arguments: {
+                IMAGE_ID: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
+                },
+                SX: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                SY: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                sw: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                sh: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                w: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                h: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'iw',
+              blockType: BlockType.REPORTER,
+              text: '图片([IMAGE_ID])宽度',
+              arguments: {
+                IMAGE_ID: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
+                }
+              }
+            }, {
+              opcode: 'ih',
+              blockType: BlockType.REPORTER,
+              text: '图片([IMAGE_ID])高度',
+              arguments: {
+                IMAGE_ID: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
+                }
+              }
+            },, {
+              opcode: 'drawv',
+              blockType: BlockType.COMMAND,
+              text: '绘制视频当前帧([IMAGE_ID],[X],[Y])',
+              arguments: {
+                IMAGE_ID: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'https://sccode.52msr.cn/vedio/sea.mp4'
+                },
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'drawv2',
+              blockType: BlockType.COMMAND,
+              text: '绘制视频当前帧([IMAGE_ID] X[X] Y[Y] 宽度[w] 高度[h])',
+              arguments: {
+                IMAGE_ID: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
+                },
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                w: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                h: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'drawv3',
+              blockType: BlockType.COMMAND,
+              text: '绘制视频当前帧([IMAGE_ID] 起始X[SX] Y[SY] 宽度[sw] 高度[sh]；结束X[X] Y[Y] 宽度[w] 高度[h])',
+              arguments: {
+                IMAGE_ID: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'https://40code-cdn.zq990.com/static/internalapi/asset/0214ed33dab7c5614594feecd44e5e4f.jpg'
+                },
+                SX: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                SY: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                sw: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                sh: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                w: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                h: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'scale',
+              blockType: BlockType.COMMAND,
+              text: 'scale([SCALE_W],[SCALE_H])',
+              arguments: {
+                SCALE_W: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '1.0'
+                },
+                SCALE_H: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '1.0'
+                }
+              }
+            }, {
+              opcode: 'rotate',
+              blockType: BlockType.COMMAND,
+              text: 'rotate([ANGLE])',
+              arguments: {
+                ANGLE: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'translate',
+              blockType: BlockType.COMMAND,
+              text: 'translate([X],[Y])',
+              arguments: {
+                X: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                Y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'transform',
+              blockType: BlockType.COMMAND,
+              text: 'transform([A],[B],[C],[D],[E],[F])',
+              arguments: {
+                A: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                B: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                C: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                D: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                E: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                F: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'clearTransform',
+              blockType: BlockType.COMMAND,
+              text: 'clearTransform'
+            }, {
+              opcode: 'save',
+              blockType: BlockType.COMMAND,
+              text: 'save'
+            }, {
+              opcode: 'restore',
+              blockType: BlockType.COMMAND,
+              text: 'restore'
+            }, {
+              opcode: 'setGlobalAlpha',
+              blockType: BlockType.COMMAND,
+              text: 'setGlobalAlpha([ALPHA])',
+              arguments: {
+                ALPHA: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '1.0'
+                }
+              }
+            }, {
+              opcode: 'setGlobalCompositeOperation',
+              blockType: BlockType.COMMAND,
+              text: 'setGlobalCompositeOperation([CompositeOperation])',
+              arguments: {
+                CompositeOperation: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'source-over'
+                }
+              }
+            }, {
+              opcode: 'switchCanvas',
+              blockType: BlockType.COMMAND,
+              text: 'switchCanvas([NUMBER])',
+              arguments: {
+                NUMBER: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'stampOnStage',
+              blockType: BlockType.COMMAND,
+              text: '显示canvas内容'
+            }, {
+              opcode: 'stampOnStageDev',
+              blockType: BlockType.COMMAND,
+              text: '显示canvas内容([ox],[oy],[ox2],[oy2])',
+              arguments: {
+                ox: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '0'
+                },
+                oy: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '0'
+                },
+                ox2: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '480'
+                },
+                oy2: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '360'
+                }
+              }
+            }, {
+              opcode: 'stampTo',
+              blockType: BlockType.REPORTER,
+              text: '将canvas转换为base64',
+              disableMonitor: true,
+              arguments: {
+                ox: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                oy: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                ox2: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '480'
+                },
+                oy2: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '360'
+                }
+              }
+            }, {
+              opcode: 'setLineDash',
+              blockType: BlockType.COMMAND,
+              text: 'setLineDash([c1],[c])',
+              arguments: {
+                c1: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '20'
+                },
+                c: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '5'
+                }
+              }
+            }, {
+              opcode: 'lineDashOffset',
+              blockType: BlockType.COMMAND,
+              text: 'setlineDashOffset[c]',
+              arguments: {
+                c: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'strokeRect',
+              blockType: BlockType.COMMAND,
+              text: 'setstrokeRect([c1],[c2],[c3],[c4])',
+              arguments: {
+                c1: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                c2: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                c3: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                c4: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            },
+            /*
+            {
+              opcode: 'createLinearGradient',
+              blockType: BlockType.COMMAND,
+              text: 'createLinearGradient([c1],[c2],[c3],[c4])',
+              arguments: {
+                  c1: {
+                      type: ArgumentType.NUMBER,
+                      defaultValue: '0'
+                  },
+                  c2: {
+                      type: ArgumentType.NUMBER,
+                      defaultValue: '0'
+                  },
+                  c3: {
+                      type: ArgumentType.NUMBER,
+                      defaultValue: '0'
+                  },
+                  c4: {
+                      type: ArgumentType.NUMBER,
+                      defaultValue: '0'
+                  }
+              }
+            },
+            {
+              opcode: 'addColorStop',
+              blockType: BlockType.COMMAND,
+              text: 'addColorStop([c1],[c2])',
+              arguments: {
+                  c1: {
+                      type: ArgumentType.NUMBER,
+                      defaultValue: '0'
+                  },
+                  c2: {
+                      type: ArgumentType.STRING,
+                      defaultValue: '#00FF00'
+                  }
+                 
+              }
+            },
+            {
+              opcode: 'fillss',
+              blockType: BlockType.COMMAND,
+              text: '设置填充颜色为渐变'
+            },*/
+            {
+              opcode: 'fillRect',
+              blockType: BlockType.COMMAND,
+              text: 'fillRect([c1],[c2],[c3],[c4])',
+              arguments: {
+                c1: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                c2: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                c3: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                },
+                c4: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'shadowBlur',
+              blockType: BlockType.COMMAND,
+              text: 'setshadowBlur[c1]',
+              arguments: {
+                c1: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'shadowColor',
+              blockType: BlockType.COMMAND,
+              text: 'setshadowColor[c1]',
+              arguments: {
+                c1: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'shadowOffsetX',
+              blockType: BlockType.COMMAND,
+              text: 'setshadowOffsetX[c1]',
+              arguments: {
+                c1: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'shadowOffsetY',
+              blockType: BlockType.COMMAND,
+              text: 'setshadowOffsetY[c1]',
+              arguments: {
+                c1: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '0'
+                }
+              }
+            }, {
+              opcode: 'textAlign',
+              blockType: BlockType.COMMAND,
+              text: 'settextAlign[c1]',
+              arguments: {
+                c1: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'left'
+                }
+              }
+            }, {
+              opcode: 'getcolor',
+              blockType: BlockType.REPORTER,
+              text: '获取canvas第[c]个像素点颜色[color]',
+              arguments: {
+                color: {
+                  type: ArgumentType.STRING,
+                  menu: 'color',
+                  defaultValue: 'red'
+                },
+                c: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '1'
+                }
+              }
+            }, {
+              opcode: 'saveccolor',
+              blockType: BlockType.COMMAND,
+              text: '保存canvas颜色'
+            }, {
+              opcode: 'setccolor',
+              blockType: BlockType.COMMAND,
+              text: '设置canvas第[c]个像素点颜色[color][c2]',
+              arguments: {
+                color: {
+                  type: ArgumentType.STRING,
+                  menu: 'color2',
+                  defaultValue: 'red'
+                },
+                c: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '1'
+                },
+                c2: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '144'
+                }
+              }
+            }, {
+              opcode: 'isin',
+              blockType: BlockType.BOOLEAN,
+              text: 'x[x],[y]在当前路径上吗',
+              arguments: {
+                x: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '1'
+                },
+                y: {
+                  type: ArgumentType.NUMBER,
+                  defaultValue: '144'
+                }
+              }
+            }, {
+              opcode: 'showccolor',
+              blockType: BlockType.COMMAND,
+              text: '显示保存的颜色'
+            }],
+            menus: {
+              color: ['red', 'green', 'blue', 'alpha', '全部'],
+              color2: ['red', 'green', 'blue', 'alpha']
             }
-            var r;
-            null != e && ((r = this._canvasList[e]) || (r = this._createCanvas(),
-            this._canvasList[e] = r),
-            this._canvas = r.canvas,
-            this._ctx = r.ctx);
-            return this._ctx
+          };
         }
-        reset({w: e, h: t}) {
-            this._getContext(e, t)
+      
+        _createCanvas(w, h) {
+          if (vm.runtime.ext_pen && vm.runtime.ext_pen._penSkinId >= 0) {
+            this._penSkinId = vm.runtime.ext_pen._penSkinId;
+            this._penDrawableId = vm.runtime.ext_pen._penDrawableId;
+          }
+      
+          if (this._penSkinId < 0 && this.runtime.renderer) {
+            this._penSkinId = this.runtime.renderer.createPenSkin();
+            this._penDrawableId = this.runtime.renderer.createDrawable(StageLayering.PEN_LAYER);
+            this.runtime.renderer.updateDrawableSkinId(this._penDrawableId, this._penSkinId);
+          }
+      
+          if (this._penSkinId) var penSkinId = this._penSkinId;
+          this.runtime.penSkinId = penSkinId;
+          if (penSkinId == undefined) return null;
+          var penSkin = this.runtime.renderer._allSkins[penSkinId];
+          var size = penSkin.size;
+          var w = w || size[0];
+          var h = h || size[1];
+          var tmpCanvas = document.createElement("canvas");
+          tmpCanvas.width = w;
+          tmpCanvas.height = h;
+          var tmpCtx = tmpCanvas.getContext("2d");
+          return {
+            canvas: tmpCanvas,
+            ctx: tmpCtx
+          };
         }
+      
+        _getContext(idx, w, h) {
+          if (!this._ctx || w || h) {
+            this._canvasList = [];
+      
+            for (var i = 0; i < 8; i++) this._canvasList.push(null);
+      
+            var tmpCanvas = this._createCanvas(w, h);
+      
+            if (!tmpCanvas) return null; // try {
+            //     this._canvasList[0].remove();
+            // } catch (error) {
+            //     console.log(e)
+            // }
+      
+            try {
+              this._canvasList[0].remove();
+            } catch (error) {
+              console.log(error);
+            }
+      
+            this._canvasList[0] = tmpCanvas;
+            this._canvas = tmpCanvas.canvas;
+            this._ctx = tmpCanvas.ctx;
+            this._bufferedImages = {};
+            this._skinId = this.runtime.renderer.createBitmapSkin(this._createCanvas().canvas, 1);
+            this._drawableId = this.runtime.renderer.createDrawable(StageLayering.PEN_LAYER);
+            this.runtime.renderer.updateDrawableSkinId(this._drawableId, this._skinId);
+            this.runtime.renderer.updateDrawableVisible(this._drawableId, false);
+          }
+      
+          if (idx != null) {
+            var tmpCanvas = this._canvasList[idx];
+      
+            if (!tmpCanvas) {
+              tmpCanvas = this._createCanvas();
+              this._canvasList[idx] = tmpCanvas;
+            }
+      
+            this._canvas = tmpCanvas.canvas;
+            this._ctx = tmpCanvas.ctx;
+          }
+      
+          return this._ctx;
+        }
+      
+        reset({
+          w,
+          h
+        }) {
+          const ctx = this._getContext(w, h);
+        }
+      
         beginPath() {
-            const e = this._getContext();
-            e && e.beginPath()
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.beginPath();
         }
+      
         closePath() {
-            const e = this._getContext();
-            e && e.closePath()
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.closePath();
         }
-        moveTo(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toNumber(e.X)
-              , r = o.toNumber(e.Y);
-            i.moveTo(n, r)
+      
+        moveTo(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          ctx.moveTo(x, y);
         }
-        lineTo(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toNumber(e.X)
-              , r = o.toNumber(e.Y);
-            i.lineTo(n, r)
+      
+        lineTo(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          ctx.lineTo(x, y);
         }
-        rect(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toNumber(e.X)
-              , r = o.toNumber(e.Y)
-              , a = o.toNumber(e.W)
-              , s = o.toNumber(e.H);
-            i.rect(n, r, a, s)
+      
+        rect(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          const w = Cast.toNumber(args.W);
+          const h = Cast.toNumber(args.H);
+          ctx.rect(x, y, w, h);
         }
-        arc(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toNumber(e.X)
-              , r = o.toNumber(e.Y)
-              , a = o.toNumber(e.RADIUS)
-              , s = o.toNumber(e.START_ANGLE)
-              , u = o.toNumber(e.END_ANGLE);
-            i.arc(n, r, a, s, u)
+      
+        arc(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          const radius = Cast.toNumber(args.RADIUS);
+          const startAngle = Cast.toNumber(args.START_ANGLE);
+          const endAngle = Cast.toNumber(args.END_ANGLE);
+          ctx.arc(x, y, radius, startAngle, endAngle);
         }
+      
         clip() {
-            const e = this._getContext();
-            e && e.clip()
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.clip();
         }
-        setLineWidth(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = e.LINE_WIDTH;
-            i.lineWidth = n
+      
+        setLineWidth(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const lineWidth = args.LINE_WIDTH;
+          ctx.lineWidth = lineWidth;
         }
-        setLineCap(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = e.LINE_CAP;
-            i.lineCap = n
+      
+        setLineCap(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const lineCap = args.LINE_CAP;
+          ctx.lineCap = lineCap;
         }
-        setStrokeStyle(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = e.STROKE_STYLE;
-            i.strokeStyle = n
+      
+        setStrokeStyle(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const strokeStyle = args.STROKE_STYLE;
+          ctx.strokeStyle = strokeStyle;
         }
-        setFillStyle(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = e.FILL_STYLE;
-            i.fillStyle = n
+      
+        setFillStyle(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const fillStyle = args.FILL_STYLE;
+          ctx.fillStyle = fillStyle;
         }
+      
         stroke() {
-            const e = this._getContext();
-            e && e.stroke()
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.stroke();
         }
+      
         fill() {
-            const e = this._getContext();
-            e && e.fill()
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.fill();
         }
-        setFont(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = e.FONT;
-            i.font = n
+      
+        setFont(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const font = args.FONT;
+          ctx.font = font;
         }
-        strokeText(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = e.TEXT
-              , r = o.toNumber(e.X)
-              , a = o.toNumber(e.Y);
-            i.strokeText(n, r, a)
+      
+        strokeText(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const text = args.TEXT;
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          ctx.strokeText(text, x, y);
         }
-        fillText(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = e.TEXT
-              , r = o.toNumber(e.X)
-              , a = o.toNumber(e.Y);
-            i.fillText(n, r, a)
+      
+        fillText(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const text = args.TEXT;
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          ctx.fillText(text, x, y);
         }
-        measureText(e, t) {
-            try {
-                const t = this._getContext();
-                if (!t)
-                    return;
-                const i = e.TEXT;
-                return t.measureText(i).width
-            } catch (e) {
-                console.log(e)
-            }
+      
+        measureText(args, util) {
+          try {
+            const ctx = this._getContext();
+      
+            if (!ctx) return;
+            const text = args.TEXT;
+            return ctx.measureText(text).width;
+          } catch (error) {
+            console.log(error);
+          }
         }
-        clearRect(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toNumber(e.X)
-              , r = o.toNumber(e.Y)
-              , a = o.toNumber(e.W)
-              , s = o.toNumber(e.H);
-            i.clearRect(n, r, a, s)
+      
+        clearRect(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          const w = Cast.toNumber(args.W);
+          const h = Cast.toNumber(args.H);
+          ctx.clearRect(x, y, w, h);
         }
-        loadImage(e, t) {
-            if (!this._getContext())
-                return;
-            const i = e.IMAGE_ID;
-            return this._bufferedImages[i] ? void 0 : new Promise(e=>{
-                const t = new Image;
-                t.crossOrigin = "anonymous",
-                t.onload = ()=>{
-                    this._bufferedImages[i] = t,
-                    e()
-                }
-                ,
-                t.onerror = ()=>{
-                    e()
-                }
-                ;
-                this.runtime.extUtils;
-                t.src = i
-            }
-            )
+      
+        loadImage(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const imageId = args.IMAGE_ID;
+      
+          if (!this._bufferedImages[imageId]) {
+            return new Promise(resolve => {
+              const img = new Image();
+              img.crossOrigin = "anonymous";
+      
+              img.onload = () => {
+                this._bufferedImages[imageId] = img;
+                resolve();
+              };
+      
+              img.onerror = () => {
+                resolve();
+              };
+      
+              var extUtils = this.runtime.extUtils;
+              img.src =
+              /*extUtils.getAssetFetchUrl(*/
+              imageId; //);
+            });
+          }
+        } // drawImage(args, util) {
+        //     const ctx = this._getContext();
+        //     if (!ctx) return;
+        //     const imageId = Cast.toString(args.IMAGE_ID);
+        //     const x = Cast.toNumber(args.X);
+        //     const y = Cast.toNumber(args.Y);
+        //     var img = new Image();
+        //     console.log('draw');
+        //     img.onload = function(){
+        //         console.log('图片加载完毕');
+        //         // 将图片画到canvas上面上去！
+        //         ctx.drawImage(img,100,100);
+        //     }
+        //     img.src = imageId;
+        // }
+      
+      
+        drawImage(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const imageId = Cast.toString(args.IMAGE_ID);
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+      
+          if (imageId.length > 10) {
+            const img = this._bufferedImages[imageId];
+            if (!img) return;
+            ctx.drawImage(img, x, y);
+          } else {
+            var idx = Math.min(Math.max(0, Cast.toNumber(args.IMAGE_ID)), 7);
+            var tmpCanvas = this._canvasList[idx];
+            if (tmpCanvas) ctx.drawImage(tmpCanvas.canvas, x, y);
+          }
         }
-        drawImage(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toString(e.IMAGE_ID)
-              , r = o.toNumber(e.X)
-              , a = o.toNumber(e.Y);
-            if (n.length > 10) {
-                const e = this._bufferedImages[n];
-                if (!e)
-                    return;
-                i.drawImage(e, r, a)
-            } else {
-                var s = Math.min(Math.max(0, o.toNumber(e.IMAGE_ID)), 7)
-                  , u = this._canvasList[s];
-                u && i.drawImage(u.canvas, r, a)
-            }
+      
+        drawImage2(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const imageId = Cast.toString(args.IMAGE_ID);
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          const w = Cast.toNumber(args.w);
+          const h = Cast.toNumber(args.h);
+      
+          if (imageId.length > 10) {
+            const img = this._bufferedImages[imageId];
+            if (!img) return;
+            ctx.drawImage(img, x, y, w, h);
+          } else {
+            var idx = Math.min(Math.max(0, Cast.toNumber(args.IMAGE_ID)), 7);
+            var tmpCanvas = this._canvasList[idx];
+            if (tmpCanvas) ctx.drawImage(tmpCanvas.canvas, x, y, w, h);
+          }
         }
-        drawImage2(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toString(e.IMAGE_ID)
-              , r = o.toNumber(e.X)
-              , a = o.toNumber(e.Y)
-              , s = o.toNumber(e.w)
-              , u = o.toNumber(e.h);
-            if (n.length > 10) {
-                const e = this._bufferedImages[n];
-                if (!e)
-                    return;
-                i.drawImage(e, r, a, s, u)
-            } else {
-                var l = Math.min(Math.max(0, o.toNumber(e.IMAGE_ID)), 7)
-                  , c = this._canvasList[l];
-                c && i.drawImage(c.canvas, r, a, s, u)
-            }
+      
+        drawImage3(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const imageId = Cast.toString(args.IMAGE_ID);
+          const sx = Cast.toNumber(args.SX);
+          const sy = Cast.toNumber(args.SY);
+          const sw = Cast.toNumber(args.sw);
+          const sh = Cast.toNumber(args.sh);
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          const w = Cast.toNumber(args.w);
+          const h = Cast.toNumber(args.h);
+      
+          if (imageId.length > 10) {
+            const img = this._bufferedImages[imageId];
+            if (!img) return;
+            ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+          } else {
+            var idx = Math.min(Math.max(0, Cast.toNumber(args.IMAGE_ID)), 7);
+            var tmpCanvas = this._canvasList[idx];
+            if (tmpCanvas) ctx.drawImage(tmpCanvas.canvas, sx, sy, sw, sh, x, y, w, h);
+          }
         }
-        drawImage3(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toString(e.IMAGE_ID)
-              , r = o.toNumber(e.SX)
-              , a = o.toNumber(e.SY)
-              , s = o.toNumber(e.sw)
-              , u = o.toNumber(e.sh)
-              , l = o.toNumber(e.X)
-              , c = o.toNumber(e.Y)
-              , d = o.toNumber(e.w)
-              , p = o.toNumber(e.h);
-            if (n.length > 10) {
-                const e = this._bufferedImages[n];
-                if (!e)
-                    return;
-                i.drawImage(e, r, a, s, u, l, c, d, p)
-            } else {
-                var h = Math.min(Math.max(0, o.toNumber(e.IMAGE_ID)), 7)
-                  , m = this._canvasList[h];
-                m && i.drawImage(m.canvas, r, a, s, u, l, c, d, p)
-            }
+      
+        iw(args) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const imageId = Cast.toString(args.IMAGE_ID);
+      
+          if (imageId.length > 10) {
+            const img = this._bufferedImages[imageId];
+            if (!img) return;
+            return img.width;
+          } else {
+            var idx = Math.min(Math.max(0, Cast.toNumber(args.IMAGE_ID)), 7);
+            var tmpCanvas = this._canvasList[idx];
+            if (tmpCanvas) return tmpCanvas.canvas.width;
+          }
         }
-        iw(e) {
-            if (!this._getContext())
-                return;
-            const t = o.toString(e.IMAGE_ID);
-            if (t.length > 10) {
-                const e = this._bufferedImages[t];
-                if (!e)
-                    return;
-                return e.width
-            }
-            var i = Math.min(Math.max(0, o.toNumber(e.IMAGE_ID)), 7)
-              , n = this._canvasList[i];
-            return n ? n.canvas.width : void 0
+      
+        ih(args) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const imageId = Cast.toString(args.IMAGE_ID);
+      
+          if (imageId.length > 10) {
+            const img = this._bufferedImages[imageId];
+            if (!img) return;
+            return img.height;
+          } else {
+            var idx = Math.min(Math.max(0, Cast.toNumber(args.IMAGE_ID)), 7);
+            var tmpCanvas = this._canvasList[idx];
+            if (tmpCanvas) return tmpCanvas.canvas.height;
+          }
         }
-        ih(e) {
-            if (!this._getContext())
-                return;
-            const t = o.toString(e.IMAGE_ID);
-            if (t.length > 10) {
-                const e = this._bufferedImages[t];
-                if (!e)
-                    return;
-                return e.height
-            }
-            var i = Math.min(Math.max(0, o.toNumber(e.IMAGE_ID)), 7)
-              , n = this._canvasList[i];
-            return n ? n.canvas.height : void 0
-        }
+      
         _ad() {
-            temp2.music || (temp2.music = {})
+          if (!temp2['music']) {
+            temp2['music'] = {};
+          }
         }
-        drawv(e, t) {
-            try {
-                const t = this._getContext();
-                if (!t)
-                    return;
-                const i = o.toString(e.IMAGE_ID)
-                  , n = o.toNumber(e.X)
-                  , r = o.toNumber(e.Y);
-                this._ad(),
-                temp2.music[i] && t.drawImage(temp2.music[i], n, r)
-            } catch (e) {
-                console.log(e)
-            }
+      
+        drawv(args, util) {
+          try {
+            const ctx = this._getContext();
+      
+            if (!ctx) return;
+            const mp3 = Cast.toString(args.IMAGE_ID);
+            const x = Cast.toNumber(args.X);
+            const y = Cast.toNumber(args.Y);
+      
+            this._ad();
+      
+            if (temp2['music'][mp3]) ctx.drawImage(temp2['music'][mp3], x, y);
+          } catch (e) {
+            console.log(e);
+          }
         }
-        drawv2(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toString(e.IMAGE_ID)
-              , r = o.toNumber(e.X)
-              , a = o.toNumber(e.Y)
-              , s = o.toNumber(e.w)
-              , u = o.toNumber(e.h);
-            this._ad(),
-            temp2.music[n] && i.drawImage(temp2.music[n], r, a, s, u)
+      
+        drawv2(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const mp3 = Cast.toString(args.IMAGE_ID);
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          const w = Cast.toNumber(args.w);
+          const h = Cast.toNumber(args.h);
+      
+          this._ad();
+      
+          if (temp2['music'][mp3]) ctx.drawImage(temp2['music'][mp3], x, y, w, h);
         }
-        drawv3(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toString(e.IMAGE_ID)
-              , r = o.toNumber(e.SX)
-              , a = o.toNumber(e.SY)
-              , s = o.toNumber(e.sw)
-              , u = o.toNumber(e.sh)
-              , l = o.toNumber(e.X)
-              , c = o.toNumber(e.Y)
-              , d = o.toNumber(e.w)
-              , p = o.toNumber(e.h);
-            this._ad(),
-            temp2.music[n] && i.drawImage(temp2.music[n], r, a, s, u, l, c, d, p)
+      
+        drawv3(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const mp3 = Cast.toString(args.IMAGE_ID);
+          const sx = Cast.toNumber(args.SX);
+          const sy = Cast.toNumber(args.SY);
+          const sw = Cast.toNumber(args.sw);
+          const sh = Cast.toNumber(args.sh);
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          const w = Cast.toNumber(args.w);
+          const h = Cast.toNumber(args.h);
+      
+          this._ad();
+      
+          if (temp2['music'][mp3]) ctx.drawImage(temp2['music'][mp3], sx, sy, sw, sh, x, y, w, h);
+        } // loadImage(args, util) {
+        //     const ctx = this._getContext();
+        //     if (!ctx) return;
+        //     const str = args.IMAGE_ID;
+        //     var strAscii = new Array();//用于接收ASCII码
+        //     for(var i = 0 ; i < str.length ; i++ ){
+        //     strAscii[i] = str.charCodeAt(i);//只能把字符串中的字符一个一个的解码
+        //     }
+        //     var getAscii = "img";//把这些ASCII码按顺序排列
+        //     for(var i = 0 ; i < strAscii.length ; i++ ){
+        //     getAscii += strAscii[i];
+        //     }
+        //     if(!$('#'+getAscii).length)
+        //     $('html').append('<img src="'+str+'" style="display:none" id="'+getAscii+'"/>');
+        //     /*$('#'+getAscii).onload = async function(){
+        //     }
+        //     //await
+        //     //alert("这些字符的ASCII码依次是："+getAscii);//输出结果给人看
+        //     /*if (!this._bufferedImages[imageId]) {
+        //         return new Promise(resolve => {
+        //             const img = new Image();
+        //             img.crossOrigin = "anonymous";
+        //             img.onload = () => {
+        //                 this._bufferedImages[imageId] = img;
+        //                 resolve();
+        //             };
+        //             img.onerror = () => {
+        //                 resolve();
+        //             };
+        //             var extUtils = this.runtime.extUtils;
+        //             img.src = extUtils.getAssetFetchUrl(imageId);
+        //         });
+        //     }*/
+        // }
+        // drawImage(args, util) {
+        //     const ctx = this._getContext();
+        //     if (!ctx) return;
+        //     const str = Cast.toString(args.IMAGE_ID);
+        //     const x = Cast.toNumber(args.X);
+        //     const y = Cast.toNumber(args.Y);
+        //     //const str = args.IMAGE_ID;
+        //     var strAscii = new Array();//用于接收ASCII码
+        //     for(var i = 0 ; i < str.length ; i++ ){
+        //     strAscii[i] = str.charCodeAt(i);//只能把字符串中的字符一个一个的解码
+        //     }
+        //     var getAscii = "img";//把这些ASCII码按顺序排列
+        //     for(var i = 0 ; i < strAscii.length ; i++ ){
+        //     getAscii += strAscii[i];
+        //     }
+        //     var img=$('#'+getAscii).length;
+        //     console.log(img,$('#'+getAscii))
+        //     if(img);
+        //     //ctx.drawImage($('#'+getAscii), x, y);
+        //     //else
+        //     //$('html').append('<img src="'+str+'" style="display:none" id="'+getAscii+'"/>');
+        //     /*if (imageId.length > 10) {
+        //         const img = this._bufferedImages[imageId];
+        //         if (!img) return;
+        //         ctx.drawImage(img, x, y);
+        //     } else {
+        //         var idx = Math.min(Math.max(0, Cast.toNumber(args.IMAGE_ID)), 7);
+        //         var tmpCanvas = this._canvasList[idx];
+        //         if (tmpCanvas) ctx.drawImage(tmpCanvas.canvas, x, y);
+        //     }*/
+        // }
+      
+      
+        scale(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const scaleW = Cast.toNumber(args.SCALE_W);
+          const scaleH = Cast.toNumber(args.SCALE_H);
+          ctx.scale(scaleW, scaleH);
         }
-        scale(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toNumber(e.SCALE_W)
-              , r = o.toNumber(e.SCALE_H);
-            i.scale(n, r)
+      
+        rotate(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const angle = Cast.toNumber(args.ANGLE);
+          ctx.rotate(angle);
         }
-        rotate(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toNumber(e.ANGLE);
-            i.rotate(n)
+      
+        translate(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const x = Cast.toNumber(args.X);
+          const y = Cast.toNumber(args.Y);
+          ctx.translate(x, y);
         }
-        translate(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toNumber(e.X)
-              , r = o.toNumber(e.Y);
-            i.translate(n, r)
+      
+        transform(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const a = Cast.toNumber(args.A);
+          const b = Cast.toNumber(args.B);
+          const c = Cast.toNumber(args.C);
+          const d = Cast.toNumber(args.D);
+          const e = Cast.toNumber(args.E);
+          const f = Cast.toNumber(args.F);
+          ctx.transform(a, b, c, d, e, f);
         }
-        transform(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toNumber(e.A)
-              , r = o.toNumber(e.B)
-              , a = o.toNumber(e.C)
-              , s = o.toNumber(e.D)
-              , u = o.toNumber(e.E)
-              , l = o.toNumber(e.F);
-            i.transform(n, r, a, s, u, l)
+      
+        clearTransform(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
         }
-        clearTransform(e, t) {
-            const i = this._getContext();
-            i && i.setTransform(1, 0, 0, 1, 0, 0)
-        }
+      
         save() {
-            const e = this._getContext();
-            e && e.save()
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.save();
         }
+      
         restore() {
-            const e = this._getContext();
-            e && e.restore()
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.restore();
         }
-        setGlobalAlpha(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = o.toNumber(e.ALPHA);
-            i.globalAlpha = n
+      
+        setGlobalAlpha(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const alpha = Cast.toNumber(args.ALPHA);
+          ctx.globalAlpha = alpha;
         }
-        setGlobalCompositeOperation(e, t) {
-            const i = this._getContext();
-            if (!i)
-                return;
-            const n = e.CompositeOperation;
-            i.globalCompositeOperation = n
+      
+        setGlobalCompositeOperation(args, util) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          const compositeOperation = args.CompositeOperation;
+          ctx.globalCompositeOperation = compositeOperation;
         }
-        switchCanvas(e, t) {
-            const i = Math.min(Math.max(0, o.toNumber(e.NUMBER)), 7);
-            this._getContext(i)
+      
+        switchCanvas(args, util) {
+          const number = Math.min(Math.max(0, Cast.toNumber(args.NUMBER)), 7);
+      
+          const ctx = this._getContext(number); //使用指定编号获取ctx时会自动设置为当前ctx
+      
         }
+      
         stampOnStage() {
-            const e = this._getContext();
-            if (e) {
-                var t = e.getImageData(0, 0, 480, 360);
-                this.runtime.renderer._allSkins[this._skinId]._setTexture(t),
-                this.runtime.renderer.penStamp(this.runtime.penSkinId, this._drawableId),
-                this.runtime.requestRedraw()
-            }
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          var imageData = ctx.getImageData(0, 0, 480, 360);
+          var skin = this.runtime.renderer._allSkins[this._skinId];
+      
+          skin._setTexture(imageData);
+      
+          this.runtime.renderer.penStamp(this.runtime.penSkinId, this._drawableId);
+          this.runtime.requestRedraw();
         }
-        stampOnStageDev({ox: e, oy: t, ox2: i, oy2: n}) {
-            const r = this._getContext();
-            if (r) {
-                var o = r.getImageData(e, t, i, n);
-                this.runtime.renderer._allSkins[this._skinId]._setTexture(o),
-                this.runtime.renderer.penStamp(this.runtime.penSkinId, this._drawableId),
-                this.runtime.requestRedraw()
-            }
+      
+        stampOnStageDev({
+          ox,
+          oy,
+          ox2,
+          oy2
+        }) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          var imageData = ctx.getImageData(ox, oy, ox2, oy2);
+          var skin = this.runtime.renderer._allSkins[this._skinId];
+      
+          skin._setTexture(imageData);
+      
+          this.runtime.renderer.penStamp(this.runtime.penSkinId, this._drawableId);
+          this.runtime.requestRedraw();
         }
-        stampTo({ox: e, oy: t, ox2: i, oy2: n}) {
-            if (this._getContext())
-                return this._canvas && this._canvas.toDataURL("image/png", 1)
+      
+        stampTo({
+          ox,
+          oy,
+          ox2,
+          oy2
+        }) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return; // let d=new Date;
+          // var imageData = ctx.getImageData(ox, oy,ox2,oy2);
+          // console.log(imageData,d)
+          // return this._canvasList && this._canvasList[0] && this._canvasList[0].canvas && this._canvasList[0].canvas.toDataURL("image/png", 1);;
+      
+          return this._canvas && this._canvas.toDataURL("image/png", 1);
         }
-        setLineDash(e) {
-            const t = this._getContext();
-            t && t.setLineDash([e.c1, e.c])
+      
+        setLineDash(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.setLineDash([a.c1, a.c]);
         }
-        lineDashOffset(e) {
-            const t = this._getContext();
-            t && (t.lineDashOffset = e.c)
+      
+        lineDashOffset(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.lineDashOffset = a.c;
         }
-        strokeRect(e) {
-            const t = this._getContext();
-            t && t.strokeRect(e.c1, e.c2, e.c3, e.c4)
+      
+        strokeRect(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.strokeRect(a.c1, a.c2, a.c3, a.c4);
         }
-        createLinearGradient(e) {
-            const t = this._getContext();
-            t && (grd = t.createLinearGradient(e.c1, e.c2, e.c3, e.c4))
+      
+        createLinearGradient(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          grd = ctx.createLinearGradient(a.c1, a.c2, a.c3, a.c4);
         }
-        addColorStop(e) {
-            if (this._getContext())
-                try {
-                    grd.addColorStop(e.c1, e.c2)
-                } catch (e) {}
+      
+        addColorStop(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+      
+          try {
+            grd.addColorStop(a.c1, a.c2);
+          } catch (_unused) {}
         }
-        fillss(e) {
-            if (this._getContext())
-                try {
-                    cxt.fillStyle = grd
-                } catch (e) {}
+      
+        fillss(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+      
+          try {
+            cxt.fillStyle = grd;
+          } catch (_unused2) {}
         }
-        fillRect(e) {
-            const t = this._getContext();
-            t && t.fillRect(e.c1, e.c2, e.c3, e.c4)
+      
+        fillRect(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.fillRect(a.c1, a.c2, a.c3, a.c4);
         }
-        shadowBlur(e) {
-            const t = this._getContext();
-            t && (t.shadowBlur = e.c1)
+      
+        shadowBlur(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.shadowBlur = a.c1;
         }
-        shadowColor(e) {
-            const t = this._getContext();
-            t && (t.shadowColor = e.c1)
+      
+        shadowColor(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.shadowColor = a.c1;
         }
-        shadowOffsetX(e) {
-            const t = this._getContext();
-            t && (t.shadowOffsetX = e.c1)
+      
+        shadowOffsetX(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.shadowOffsetX = a.c1;
         }
-        shadowOffsetY(e) {
-            const t = this._getContext();
-            t && (t.shadowOffsetY = e.c1)
+      
+        shadowOffsetY(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.shadowOffsetY = a.c1;
         }
-        textAlign(e) {
-            const t = this._getContext();
-            t && (t.textAlign = e.c1)
+      
+        textAlign(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          ctx.textAlign = a.c1;
         }
-        getcolor(e) {
-            const t = this._getContext();
-            if (t) {
-                var i = t.getImageData(0, 0, 480, 360).data;
-                if ("全部" == e.color) {
-                    var n, r = "rgba(" + i[n = 4 * e.c] + "," + i[n + 1] + "," + i[n + 2] + "," + i[n + 3] + ")";
-                    return console.log(r),
-                    r
-                }
-                return i[n = 4 * e.c + {
-                    red: 0,
-                    green: 1,
-                    blue: 2,
-                    alpha: 3
-                }[e.color]]
-            }
+      
+        getcolor(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          var imageData = ctx.getImageData(0, 0, 480, 360)['data']; //console.log(imageData);
+      
+          var aa = {
+            'red': 0,
+            'green': 1,
+            'blue': 2,
+            'alpha': 3
+          };
+      
+          if (a.color == "全部") {
+            var n = a.c * 4;
+            var ddd = 'rgba(' + imageData[n] + ',' + imageData[n + 1] + ',' + imageData[n + 2] + ',' + imageData[n + 3] + ')';
+            console.log(ddd);
+            return ddd;
+          } else {
+            var n = a.c * 4 + aa[a.color];
+            return imageData[n];
+          }
         }
-        setccolor(e) {
-            if (this._getContext() && temp2.color) {
-                var t = temp2.color;
-                console.log(t);
-                var i = 4 * e.c + {
-                    red: 0,
-                    green: 1,
-                    blue: 2,
-                    alpha: 3
-                }[e.color];
-                temp2.color.data[i] = e.c2
-            }
+      
+        setccolor(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          if (!temp2.color) return;
+          var imageData = temp2.color;
+          console.log(imageData);
+          var aa = {
+            'red': 0,
+            'green': 1,
+            'blue': 2,
+            'alpha': 3
+          };
+          var n = a.c * 4 + aa[a.color];
+          temp2.color.data[n] = a.c2; //return imageData[n];
         }
-        saveccolor(e) {
-            const t = this._getContext();
-            t && (temp2.color = t.getImageData(0, 0, 480, 360))
+      
+        saveccolor(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          temp2.color = ctx.getImageData(0, 0, 480, 360); //['data'];
         }
-        showccolor(e) {
-            const t = this._getContext();
-            t && temp2.color && t.putImageData(temp2.color, 0, 0)
+      
+        showccolor(a) {
+          const ctx = this._getContext();
+      
+          if (!ctx) return;
+          if (!temp2.color) return;
+          ctx.putImageData(temp2.color, 0, 0);
         }
-        isin(e) {
-            try {
-                return isPointInPath(e.x, e.y)
-            } catch (e) {
-                return ""
-            }
+      
+        isin(a) {
+          try {
+            return isPointInPath(a.x, a.y);
+          } catch (e) {
+            return '';
+          }
         }
-    }
-    Scratch.extensions.register(new canvas());
+      
+      }                  
+    Scratch.extensions.register(new Scratch3CanvasBlocks());
   })(Scratch);

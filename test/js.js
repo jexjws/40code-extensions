@@ -2,243 +2,287 @@
     'use strict';
 
 
-
-class js{
-    constructor(e) {
-        this.runtime = e
-    }
-    getInfo() {
-        return {
-            id: "js",
-            name: "JavaScript",
+    class Scratch3JsBlocks {
+        constructor(runtime) {
+          /**
+           * The runtime instantiating this block package.
+           * @type {Runtime}
+           */
+          this.runtime = runtime; //this.runtime.on('PROJECT_STOP_ALL', this._init.bind(this));
+          //this.runtime.on('PROJECT_START', this._init.bind(this));
+        }
+        /**
+         * @returns {object} metadata for this extension and its blocks.
+         */
+      
+      
+        getInfo() {
+          return {
+            id: 'js',
+            name: 'JavaScript',
+            // blockIconURI: blockIconURI,
+            // menuIconURI: menuIconURI,
             blocks: [{
-                opcode: "sb",
-                blockType: r.COMMAND,
-                text: "设置JS变量[a]的值是[b]",
-                arguments: {
-                    a: {
-                        type: n.STRING,
-                        defaultValue: "index"
-                    },
-                    b: {
-                        type: n.STRING,
-                        defaultValue: "thing"
-                    }
+              opcode: 'sb',
+              blockType: BlockType.COMMAND,
+              text: '设置JS变量[a]的值是[b]',
+              arguments: {
+                a: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'index'
+                },
+                b: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'thing'
                 }
+              }
             }, {
-                opcode: "gv",
-                blockType: r.REPORTER,
-                text: "获取JS变量[a]的值",
-                arguments: {
-                    a: {
-                        type: n.STRING,
-                        defaultValue: "index"
-                    }
+              opcode: 'gv',
+              blockType: BlockType.REPORTER,
+              text: '获取JS变量[a]的值',
+              arguments: {
+                a: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'index'
                 }
+              }
             }, {
-                opcode: "dx",
-                blockType: r.REPORTER,
-                text: "将字符串[a]转换成json对象",
-                arguments: {
-                    a: {
-                        type: n.STRING,
-                        defaultValue: '{"Fruits":["apple","banana"],"app":"scratch"}'
-                    }
+              opcode: 'dx',
+              blockType: BlockType.REPORTER,
+              text: '将字符串[a]转换成json对象',
+              arguments: {
+                a: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '{"Fruits":["apple","banana"],"app":"scratch"}'
                 }
+              }
             }, {
-                opcode: "dx2",
-                blockType: r.REPORTER,
-                text: "json对象[a]的第[b]项",
-                arguments: {
-                    a: {
-                        type: n.STRING,
-                        defaultValue: '{"Fruits":["apple","banana"],"app":"sccode"}'
-                    },
-                    b: {
-                        type: n.STRING,
-                        defaultValue: "app"
-                    }
+              opcode: 'dx2',
+              blockType: BlockType.REPORTER,
+              text: 'json对象[a]的第[b]项',
+              arguments: {
+                a: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '{"Fruits":["apple","banana"],"app":"sccode"}'
+                },
+                b: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'app'
                 }
+              }
             }, {
-                opcode: "len",
-                blockType: r.REPORTER,
-                text: "[a]的长度",
-                arguments: {
-                    a: {
-                        type: n.STRING,
-                        defaultValue: '["a","b","c"]'
-                    }
+              opcode: 'len',
+              blockType: BlockType.REPORTER,
+              text: '[a]的长度',
+              arguments: {
+                a: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '["a","b","c"]'
                 }
+              }
             }, {
-                opcode: "dx3",
-                blockType: r.REPORTER,
-                text: "设置json对象[a]的第[b]项为[c]并返回",
-                arguments: {
-                    a: {
-                        type: n.STRING,
-                        defaultValue: '{"Fruits":["apple","banana"],"app":"scratch"}'
-                    },
-                    b: {
-                        type: n.STRING,
-                        defaultValue: "app"
-                    },
-                    c: {
-                        type: n.STRING,
-                        defaultValue: "sccode"
-                    }
+              opcode: 'dx3',
+              blockType: BlockType.REPORTER,
+              text: '设置json对象[a]的第[b]项为[c]并返回',
+              arguments: {
+                a: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '{"Fruits":["apple","banana"],"app":"scratch"}'
+                },
+                b: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'app'
+                },
+                c: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'sccode'
                 }
+              }
             }, {
-                opcode: "tos",
-                blockType: r.REPORTER,
-                text: "将json对象[a]转换成字符串",
-                arguments: {
-                    a: {
-                        type: n.STRING,
-                        defaultValue: " "
-                    }
+              opcode: 'tos',
+              blockType: BlockType.REPORTER,
+              text: '将json对象[a]转换成字符串',
+              arguments: {
+                a: {
+                  type: ArgumentType.STRING,
+                  defaultValue: ' '
                 }
+              }
             }, {
-                opcode: "stos",
-                blockType: r.REPORTER,
-                text: "按[a]拆分[b]",
-                arguments: {
-                    a: {
-                        type: n.STRING,
-                        defaultValue: "_"
-                    },
-                    b: {
-                        type: n.STRING,
-                        defaultValue: "I_want_an_apple"
-                    }
+              opcode: 'stos',
+              blockType: BlockType.REPORTER,
+              text: '按[a]拆分[b]',
+              arguments: {
+                a: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '_'
+                },
+                b: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'I_want_an_apple'
                 }
+              }
             }, {
-                opcode: "stos2",
-                blockType: r.REPORTER,
-                text: "使用[a]连接[b]",
-                arguments: {
-                    a: {
-                        type: n.STRING,
-                        defaultValue: "_"
-                    },
-                    b: {
-                        type: n.STRING,
-                        defaultValue: '["I","want","an","apple"]'
-                    }
+              opcode: 'stos2',
+              blockType: BlockType.REPORTER,
+              text: '使用[a]连接[b]',
+              arguments: {
+                a: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '_'
+                },
+                b: {
+                  type: ArgumentType.STRING,
+                  defaultValue: '["I","want","an","apple"]'
                 }
+              }
             }, {
-                opcode: "setv",
-                blockType: r.COMMAND,
-                text: "设置局部变量[a]的值为[b]",
-                arguments: {
-                    a: {
-                        type: n.STRING,
-                        defaultValue: "a"
-                    },
-                    b: {
-                        type: n.STRING,
-                        defaultValue: "b"
-                    }
+              opcode: 'setv',
+              blockType: BlockType.COMMAND,
+              text: '设置局部变量[a]的值为[b]',
+              arguments: {
+                a: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'a'
+                },
+                b: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'b'
                 }
+              }
             }, {
-                opcode: "getv",
-                blockType: r.REPORTER,
-                text: "获取局部变量[a]的值",
-                arguments: {
-                    a: {
-                        type: n.STRING,
-                        defaultValue: "a"
-                    }
+              opcode: 'getv',
+              blockType: BlockType.REPORTER,
+              text: '获取局部变量[a]的值',
+              arguments: {
+                a: {
+                  type: ArgumentType.STRING,
+                  defaultValue: 'a'
                 }
+              }
             }],
-            menus: {}
-        }
-    }
-    _ad(e) {
-        temp2.bl || (temp2.bl = {})
-    }
-    sb(e) {
-        this._ad();
-        let t = o.toString(e.a)
-          , i = e.b;
-        temp2.bl[t] = i
-    }
-    gv(e) {
-        this._ad();
-        let t = o.toString(e.a);
-        return temp2.bl[t]
-    }
-    dx(e) {
-        try {
-            return JSON.parse(e.a)
-        } catch (e) {
-            return ""
-        }
-    }
-    len({a: e}) {
-        try {
-            return JSON.parse(e).length
-        } catch (e) {
-            return "NaN"
-        }
-    }
-    dx2(e) {
-        try {
-            return JSON.parse(e.a)[e.b]
-        } catch (t) {
-            try {
-                return e.a[e.b]
-            } catch (e) {
-                return ""
+            menus: {
+              /*urlNames: {
+                  acceptReporters: true,
+                  items: [{
+                      text: '云空间',
+                      value: 'cloudSpace'
+                  }]
+              },*/
             }
+          };
         }
-    }
-    dx3(e) {
-        try {
-            let t = JSON.parse(e.a);
-            return t[e.b] = e.c,
-            t
-        } catch (t) {
+      
+        _ad(a) {
+          if (!temp2.bl) {
+            temp2.bl = {};
+          }
+        }
+      
+        sb(a) {
+          this._ad();
+      
+          let v = Cast.toString(a.a);
+          let v2 = a.b;
+          temp2.bl[v] = v2;
+        }
+      
+        gv(a) {
+          this._ad();
+      
+          let v = Cast.toString(a.a);
+          return temp2.bl[v];
+        }
+      
+        dx(a) {
+          try {
+            return JSON.parse(a.a);
+          } catch (e) {
+            return '';
+          }
+        }
+      
+        len({
+          a
+        }) {
+          try {
+            return JSON.parse(a).length;
+          } catch (e) {
+            return 'NaN';
+          }
+        }
+      
+        dx2(a) {
+          try {
+            return JSON.parse(a.a)[a.b];
+          } catch (e) {
             try {
-                let t = e.a;
-                return t[e.b] = e.c,
-                t
+              return a.a[a.b];
             } catch (e) {
-                return ""
+              return '';
             }
+          }
         }
-    }
-    tos(e) {
-        try {
-            return JSON.stringify(e.a)
-        } catch (e) {
-            return ""
+      
+        dx3(a) {
+          try {
+            let v = JSON.parse(a.a);
+            v[a.b] = a.c;
+            return v;
+          } catch (e) {
+            try {
+              let v = a.a;
+              v[a.b] = a.c;
+              return v;
+            } catch (e) {
+              return '';
+            }
+          }
         }
-    }
-    stos(e) {
-        try {
-            return e.b.split(e.a)
-        } catch (e) {
-            return ""
+      
+        tos(a) {
+          try {
+            return JSON.stringify(a.a);
+          } catch (e) {
+            return '';
+          }
         }
-    }
-    stos2(e) {
-        try {
-            return JSON.parse(e.b).join(e.a)
-        } catch (e) {
-            return ""
+      
+        stos(a) {
+          try {
+            return a.b.split(a.a);
+          } catch (e) {
+            return '';
+          }
         }
-    }
-    setv({a: e, b: t}, i) {
-        console.log(i.thread),
-        i.thread.values || (i.thread.values = {}),
-        i.thread.values.a = t
-    }
-    getv({a: e, b: t}, i) {
-        return console.log(i.thread),
-        i.thread.values || (i.thread.values = {}),
-        i.thread.values.a
-    }
-}
+      
+        stos2(a) {
+          try {
+            return JSON.parse(a.b).join(a.a);
+          } catch (e) {
+            return '';
+          }
+        }
+      
+        setv({
+          a,
+          b
+        }, util) {
+          console.log(util.thread);
+          util.thread.values || (util.thread.values = {});
+          util.thread.values.a = b;
+        }
+      
+        getv({
+          a,
+          b
+        }, util) {
+          console.log(util.thread);
+          util.thread.values || (util.thread.values = {});
+          return util.thread.values.a;
+        }
+      
+      }
 
-Scratch.extensions.register(new canvas());
+Scratch.extensions.register(new Scratch3JsBlocks());
 })(Scratch);
