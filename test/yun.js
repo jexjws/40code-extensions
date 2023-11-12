@@ -21,7 +21,7 @@
             color1: '#00BCD4',
             blocks: [{
               opcode: 'yunload',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '获取云变量，变量名[TEXT]，来源[m]',
               arguments: {
                 TEXT: {
@@ -36,7 +36,7 @@
               }
             }, {
               opcode: 'getlist',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '获取[TEXT]开头的云变量名，来源[m]',
               arguments: {
                 TEXT: {
@@ -51,7 +51,7 @@
               }
             }, {
               opcode: 'yunsave',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '保存云变量，内容[TEXT]，变量名[TEXT2]，并返回错误值，来源[m]',
               arguments: {
                 TEXT: {
@@ -70,7 +70,7 @@
               }
             }, {
               opcode: 'yunsave2',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '保存云变量，内容[TEXT]，变量名[TEXT2]，来源[m]',
               arguments: {
                 TEXT: {

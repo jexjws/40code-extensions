@@ -23,7 +23,7 @@
                 // hide:true,
                 blocks: ['JS变量相关', {
                     opcode: 'sb',
-                    blockType: BlockType.COMMAND,
+                    blockType: Scratch.BlockType.COMMAND,
                     text: '设置JS变量[a]的值是[b]',
                     arguments: {
                         a: {
@@ -37,7 +37,7 @@
                     }
                 }, {
                         opcode: 'gv',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '获取JS变量[a]的值',
                         arguments: {
                             a: {
@@ -47,7 +47,7 @@
                         }
                     }, {
                         opcode: 'setv',
-                        blockType: BlockType.COMMAND,
+                        blockType: Scratch.BlockType.COMMAND,
                         text: '设置局部变量[a]的值为[b]',
                         arguments: {
                             a: {
@@ -61,7 +61,7 @@
                         }
                     }, {
                         opcode: 'addv',
-                        blockType: BlockType.COMMAND,
+                        blockType: Scratch.BlockType.COMMAND,
                         text: '将局部变量[a]增加[b]',
                         arguments: {
                             a: {
@@ -75,7 +75,7 @@
                         }
                     }, {
                         opcode: 'getv',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '局部变量[a]',
                         arguments: {
                             a: {
@@ -85,7 +85,7 @@
                         }
                     }, 'JS与scratch交互', {
                         opcode: 'getScratchList',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '获取scratch列表[name]',
                         arguments: {
                             name: {
@@ -95,7 +95,7 @@
                         }
                     }, {
                         opcode: 'setScratchList',
-                        blockType: BlockType.COMMAND,
+                        blockType: Scratch.BlockType.COMMAND,
                         text: '设置scratch列表[name]，值为[value]',
                         arguments: {
                             name: {
@@ -109,7 +109,7 @@
                         }
                     }, {
                         opcode: 'getScratchValue',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '获取scratch变量[name]',
                         arguments: {
                             name: {
@@ -119,7 +119,7 @@
                         }
                     }, {
                         opcode: 'setScratchValue',
-                        blockType: BlockType.COMMAND,
+                        blockType: Scratch.BlockType.COMMAND,
                         text: '设置scratch变量[name]，值为[value]',
                         arguments: {
                             name: {
@@ -133,7 +133,7 @@
                         }
                     }, 'JSON操作', {
                         opcode: 'dx2',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: 'json[a]的第[b]项',
                         arguments: {
                             a: {
@@ -147,7 +147,7 @@
                         }
                     }, {
                         opcode: 'len',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '数组[a]的长度',
                         arguments: {
                             a: {
@@ -157,7 +157,7 @@
                         }
                     }, {
                         opcode: 'dx3',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '设置json[a]的第[b]项为[c]并返回',
                         arguments: {
                             a: {
@@ -175,7 +175,7 @@
                         }
                     }, {
                         opcode: 'stos',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '将[b]中的[a]替换成","',
                         arguments: {
                             a: {
@@ -189,7 +189,7 @@
                         }
                     }, {
                         opcode: 'stos_',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '按[a]拆分[b]',
                         arguments: {
                             a: {
@@ -203,7 +203,7 @@
                         }
                     }, {
                         opcode: 'stos2',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '使用[a]连接[b]',
                         arguments: {
                             a: {
@@ -217,7 +217,7 @@
                         }
                     }, 'fetch请求', {
                         opcode: 'setHeaders',
-                        blockType: BlockType.COMMAND,
+                        blockType: Scratch.BlockType.COMMAND,
                         text: '设置请求头[headers]',
                         arguments: {
                             headers: {
@@ -227,7 +227,7 @@
                         }
                     }, {
                         opcode: 'setBody',
-                        blockType: BlockType.COMMAND,
+                        blockType: Scratch.BlockType.COMMAND,
                         text: '设置请求body[body]',
                         arguments: {
                             body: {
@@ -237,7 +237,7 @@
                         }
                     }, {
                         opcode: 'fetch',
-                        blockType: BlockType.COMMAND,
+                        blockType: Scratch.BlockType.COMMAND,
                         text: '[method]请求[url]',
                         arguments: {
                             method: {
@@ -252,7 +252,7 @@
                         }
                     }, {
                         opcode: 'fetchAndWait',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '[method]请求[url]并等待，返回[type]',
                         arguments: {
                             method: {
@@ -272,7 +272,7 @@
                         }
                     }, {
                         opcode: 'res',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '[type]',
                         arguments: {
                             type: {
@@ -283,7 +283,7 @@
                         }
                     }, '编码与解码', {
                         opcode: 'encodeURIComponent',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: 'url编码[text]',
                         arguments: {
                             text: {
@@ -293,7 +293,7 @@
                         }
                     }, {
                         opcode: 'decodeURIComponent',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: 'url解码[text]',
                         arguments: {
                             text: {
@@ -303,7 +303,7 @@
                         }
                     }, {
                         opcode: 'toForm',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '转为URL参数[text]',
                         arguments: {
                             text: {
@@ -313,7 +313,7 @@
                         }
                     }, {
                         opcode: 'toJSON',
-                        blockType: BlockType.REPORTER,
+                        blockType: Scratch.BlockType.REPORTER,
                         text: '转为JSON[text]',
                         arguments: {
                             text: {

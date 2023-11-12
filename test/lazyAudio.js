@@ -28,7 +28,7 @@ class Scratch3LazyAudioBlocks {
         color1: '#9C27B0',
         blocks: [{
           opcode: 'load',
-          blockType: BlockType.COMMAND,
+          blockType: Scratch.BlockType.COMMAND,
           text: '加载([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
@@ -38,7 +38,7 @@ class Scratch3LazyAudioBlocks {
           }
         }, {
           opcode: 'play',
-          blockType: BlockType.COMMAND,
+          blockType: Scratch.BlockType.COMMAND,
           text: '播放([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
@@ -48,7 +48,7 @@ class Scratch3LazyAudioBlocks {
           }
         }, {
           opcode: 'pause',
-          blockType: BlockType.COMMAND,
+          blockType: Scratch.BlockType.COMMAND,
           text: '暂停([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
@@ -58,12 +58,12 @@ class Scratch3LazyAudioBlocks {
           }
         }, {
           opcode: 'pauseAll',
-          blockType: BlockType.COMMAND,
+          blockType: Scratch.BlockType.COMMAND,
           text: '暂停全部',
           arguments: {}
         }, {
           opcode: 'cd',
-          blockType: BlockType.REPORTER,
+          blockType: Scratch.BlockType.REPORTER,
           text: '获取当前播放秒数([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
@@ -73,7 +73,7 @@ class Scratch3LazyAudioBlocks {
           }
         }, {
           opcode: 'zcd',
-          blockType: BlockType.REPORTER,
+          blockType: Scratch.BlockType.REPORTER,
           text: '获取音频总长度(秒)([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
@@ -83,7 +83,7 @@ class Scratch3LazyAudioBlocks {
           }
         }, {
           opcode: 'sz',
-          blockType: BlockType.COMMAND,
+          blockType: Scratch.BlockType.COMMAND,
           text: '设置音频([AUDIO_ID])播放秒数[s]',
           arguments: {
             AUDIO_ID: {
@@ -97,7 +97,7 @@ class Scratch3LazyAudioBlocks {
           }
         }, {
           opcode: 'bf',
-          blockType: BlockType.REPORTER,
+          blockType: Scratch.BlockType.REPORTER,
           text: '获取音频播放速度([AUDIO_ID])',
           arguments: {
             AUDIO_ID: {
@@ -107,7 +107,7 @@ class Scratch3LazyAudioBlocks {
           }
         }, {
           opcode: 'bf2',
-          blockType: BlockType.COMMAND,
+          blockType: Scratch.BlockType.COMMAND,
           text: '设置音频([AUDIO_ID])播放速度[s]',
           arguments: {
             AUDIO_ID: {
@@ -121,7 +121,7 @@ class Scratch3LazyAudioBlocks {
           }
         }, {
           opcode: 'yl',
-          blockType: BlockType.COMMAND,
+          blockType: Scratch.BlockType.COMMAND,
           text: '设置音频([AUDIO_ID])音量[s]',
           arguments: {
             AUDIO_ID: {
@@ -135,7 +135,7 @@ class Scratch3LazyAudioBlocks {
           }
         }, {
           opcode: 'hc',
-          blockType: BlockType.REPORTER,
+          blockType: Scratch.BlockType.REPORTER,
           text: '获取音频([AUDIO_ID])缓冲片段数',
           arguments: {
             AUDIO_ID: {
@@ -149,7 +149,7 @@ class Scratch3LazyAudioBlocks {
           }
         }, {
           opcode: 'hcs',
-          blockType: BlockType.REPORTER,
+          blockType: Scratch.BlockType.REPORTER,
           text: '获取音频([AUDIO_ID])[s]片段的开始时间',
           arguments: {
             AUDIO_ID: {
@@ -163,7 +163,7 @@ class Scratch3LazyAudioBlocks {
           }
         }, {
           opcode: 'hce',
-          blockType: BlockType.REPORTER,
+          blockType: Scratch.BlockType.REPORTER,
           text: '获取音频([AUDIO_ID])[s]片段结束时间',
           arguments: {
             AUDIO_ID: {

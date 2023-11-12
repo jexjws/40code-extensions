@@ -24,7 +24,7 @@
             // menuIconURI: menuIconURI,
             blocks: [{
               opcode: 'sb',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '设置JS变量[a]的值是[b]',
               arguments: {
                 a: {
@@ -38,7 +38,7 @@
               }
             }, {
               opcode: 'gv',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '获取JS变量[a]的值',
               arguments: {
                 a: {
@@ -48,7 +48,7 @@
               }
             }, {
               opcode: 'dx',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '将字符串[a]转换成json对象',
               arguments: {
                 a: {
@@ -58,7 +58,7 @@
               }
             }, {
               opcode: 'dx2',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: 'json对象[a]的第[b]项',
               arguments: {
                 a: {
@@ -72,7 +72,7 @@
               }
             }, {
               opcode: 'len',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '[a]的长度',
               arguments: {
                 a: {
@@ -82,7 +82,7 @@
               }
             }, {
               opcode: 'dx3',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '设置json对象[a]的第[b]项为[c]并返回',
               arguments: {
                 a: {
@@ -100,7 +100,7 @@
               }
             }, {
               opcode: 'tos',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '将json对象[a]转换成字符串',
               arguments: {
                 a: {
@@ -110,7 +110,7 @@
               }
             }, {
               opcode: 'stos',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '按[a]拆分[b]',
               arguments: {
                 a: {
@@ -124,7 +124,7 @@
               }
             }, {
               opcode: 'stos2',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '使用[a]连接[b]',
               arguments: {
                 a: {
@@ -138,7 +138,7 @@
               }
             }, {
               opcode: 'setv',
-              blockType: BlockType.COMMAND,
+              blockType: Scratch.BlockType.COMMAND,
               text: '设置局部变量[a]的值为[b]',
               arguments: {
                 a: {
@@ -152,7 +152,7 @@
               }
             }, {
               opcode: 'getv',
-              blockType: BlockType.REPORTER,
+              blockType: Scratch.BlockType.REPORTER,
               text: '获取局部变量[a]的值',
               arguments: {
                 a: {
